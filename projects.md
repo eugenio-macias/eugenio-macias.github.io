@@ -75,10 +75,16 @@ title: Projects
         <span class="badge">PDEs</span><span class="badge">Operator Learning</span><span class="badge">Sparse Regression</span>
         <span class="badge">Riemannian Geometry</span><span class="badge">Uncertainty</span>
       </div>
+      <div class="pc-links" style="margin-top:.8rem;">
+        <a class="pc-link" href="{{ '/Thesis.pdf' | relative_url }}" target="_blank" rel="noopener"><i class="fas fa-file-pdf"></i> Thesis PDF</a>
+        <a class="pc-link" href="{{ '/Thesis_presentation.pdf' | relative_url }}" target="_blank" rel="noopener"><i class="fas fa-chalkboard-teacher"></i> Slides</a>
+      </div>
     </div>
     <div class="pc-media hero-media">
       <div class="hero-glow"></div>
       <div class="hero-grid"></div>
+      <img src="{{ site.baseurl }}/assets/images/thumbnails/Thesis_thumbnail.png" alt="Thesis Thumbnail" style="position:relative;z-index:1;width:100%;height:100%;max-height:220px;object-fit:cover;border-radius:12px;opacity:.88;">
+      <div class="overlay">View Thesis →</div>
     </div>
   </article>
 
@@ -122,8 +128,8 @@ title: Projects
         </div>
       </div>
       <div class="pc-media">
-        <div class="hero-glow" style="opacity:.45;"></div>
-        <div class="hero-grid"></div>
+        <img src="{{ site.baseurl }}/assets/images/thumbnails/Thesis_Presentation_thumbnail.png" alt="DRP Thumbnail">
+        <div class="overlay">View →</div>
       </div>
     </article>
 
@@ -150,12 +156,10 @@ title: Projects
         </div>
       </div>
       <div class="pc-media">
-        <div class="hero-glow" style="opacity:.35;"></div>
-        <div class="hero-grid"></div>
+        <img src="{{ site.baseurl }}/assets/images/thumbnails/Reintegrating_AI_thumbnail.png" alt="RL Research Thumbnail">
+        <div class="overlay">View →</div>
       </div>
     </article>
-
-    <!-- Structure-Preserving DL -->
     <a class="project-card" href="assets/files/electron_dynamics_DL.pdf" target="_blank" rel="noopener">
       <div class="pc-text">
         <h3 class="pc-title">Structure-Preserving Deep Learning for Charged Particle Dynamics</h3>
@@ -424,9 +428,26 @@ title: Projects
     overflow:hidden; isolation:isolate;
   }
   .project-card:hover{ transform:translateY(-3px); border-color:transparent; box-shadow:0 18px 40px rgba(0,0,0,.14); }
-  .project-card .pc-title{ margin:0 0 .35rem; font-size:1.02rem; line-height:1.25; }
-  .project-card .pc-sub{ margin:.1rem 0 .5rem; color:var(--muted); font-size:.92rem; }
+  .project-card .pc-title{
+    margin:0 0 .35rem; font-size:1.02rem; line-height:1.25;
+    background: linear-gradient(90deg, #7c83ff 0%, #22d3ee 35%, #34d399 65%, #a78bfa 85%, #7c83ff 100%);
+    background-size: 300% 100%;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    animation: pcTitleShift 5s linear infinite;
+    filter: drop-shadow(0 0 12px rgba(124,131,255,.35));
+  }
+  .project-card:hover .pc-title {
+    filter: drop-shadow(0 0 22px rgba(34,211,238,.65));
+    animation-duration: 2.5s;
+  }
+  .hero-card .pc-title{ font-size:1.15rem; animation-duration:3.5s; filter: drop-shadow(0 2px 22px rgba(124,131,255,.55)); }
+  @keyframes pcTitleShift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+  }
   .project-card .pc-desc{ margin:0; color:var(--muted); }
+  .project-card .pc-sub{ margin:.1rem 0 .5rem; color:var(--muted); font-size:.92rem; }
   .project-card .pc-cta{ margin-top:.7rem; display:inline-block; font-weight:600; background:linear-gradient(90deg,var(--grad1),var(--grad2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
   .pc-links{ display:flex; gap:10px; flex-wrap:wrap; margin-top:.65rem; }
   .pc-link{ display:inline-flex; align-items:center; gap:5px; padding:5px 12px; border-radius:999px; font-size:.85rem; font-weight:700; text-decoration:none; border:1px solid var(--line); color:var(--muted); transition:color .18s ease, border-color .18s ease, background .18s ease; }

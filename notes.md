@@ -150,12 +150,10 @@ title: Cheat Sheets
       <div class="note-meta"><span class="pill">PDF</span></div>
     </div>
     <div class="note-thumb">
-      <img src="{{ site.baseurl }}/assets/images/thumbnails/hi" alt="WSINDy ROM Thumbnail">
+      <img src="{{ site.baseurl }}/assets/images/thumbnails/ROM_WSINDY_thumbnail.png" alt="WSINDy ROM Thumbnail">
       <div class="overlay">View PDF →</div>
     </div>
   </a>
-
-  <!-- Applied Cryptography -->
   <a class="note-card" href="assets/files/Applied_Cyrptography.pdf" target="_blank" rel="noopener" title="Applied Cryptography">
     <div class="note-text">
       <h3>Applied Cryptography</h3>
@@ -182,7 +180,7 @@ title: Cheat Sheets
       <div class="note-meta"><span class="pill">PDF</span></div>
     </div>
     <div class="note-thumb">
-      <img src="{{ site.baseurl }}/assets/images/thumbnails/hi" alt="Probability Theory II Thumbnail">
+      <img src="{{ site.baseurl }}/assets/images/thumbnails/Probability_theory_thumbnail.png" alt="Probability Theory II Thumbnail">
       <div class="overlay">View PDF →</div>
     </div>
   </a>
@@ -398,7 +396,22 @@ title: Cheat Sheets
   .note-card:hover::before{ animation: sheen .9s ease; opacity:1; }
   @keyframes sheen{ from{ left:-40%; } to{ left:120%; } }
 
-  .note-text h3 { margin: 0 0 .35rem; font-size: 1.05rem; line-height: 1.25; }
+  .note-text h3 { margin: 0 0 .35rem; font-size: 1.05rem; line-height: 1.25;
+    background: linear-gradient(90deg, #7c83ff 0%, #22d3ee 35%, #34d399 65%, #a78bfa 85%, #7c83ff 100%);
+    background-size: 300% 100%;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    animation: noteH3Shift 5.5s linear infinite;
+    filter: drop-shadow(0 0 10px rgba(124,131,255,.35));
+  }
+  @keyframes noteH3Shift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+  }
+  .note-card:hover .note-text h3 {
+    filter: drop-shadow(0 0 18px rgba(34,211,238,.6));
+    animation-duration: 2.5s;
+  }
   .note-text p {
     margin: 0;
     color: var(--muted);

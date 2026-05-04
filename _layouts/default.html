@@ -402,12 +402,14 @@
     /* 2 · Aurora nebula (all pages) */
     .aurora-global{
       position:fixed; inset:-20%; z-index:-4; pointer-events:none;
-      filter:blur(70px) saturate(130%);
+      filter:blur(70px) saturate(150%);
       background:
-        radial-gradient(65% 55% at 18% 12%, rgba(124,131,255,.17), transparent 65%),
-        radial-gradient(50% 50% at 85% 22%, rgba(34,211,238,.13), transparent 62%),
-        radial-gradient(58% 52% at 48% 88%, rgba(52,211,153,.10), transparent 70%),
-        radial-gradient(38% 32% at 68% 58%, rgba(245,158,11,.07), transparent 65%);
+        radial-gradient(65% 55% at 18% 12%, rgba(124,131,255,.25), transparent 65%),
+        radial-gradient(50% 50% at 85% 22%, rgba(34,211,238,.19), transparent 62%),
+        radial-gradient(58% 52% at 48% 88%, rgba(52,211,153,.15), transparent 70%),
+        radial-gradient(38% 32% at 68% 58%, rgba(245,158,11,.11), transparent 65%),
+        radial-gradient(44% 40% at 22% 72%, rgba(244,114,182,.13), transparent 60%),
+        radial-gradient(36% 32% at 78% 15%, rgba(167,139,250,.12), transparent 58%);
       animation: auroraGlobalDrift 32s ease-in-out infinite alternate;
       will-change: transform;
     }
@@ -419,32 +421,55 @@
       80% { transform:translate(-2vw,1.5vh)  scale(1.02) rotate(-.4deg);}
       100%{ transform:translate(3vw,-2vh)    scale(1.05) rotate(.6deg); }
     }
+    /* 2b · Deep aurora (second slow drifting layer) */
+    .aurora-deep{
+      position:fixed; inset:-30%; z-index:-4; pointer-events:none;
+      filter:blur(90px) saturate(160%);
+      background:
+        radial-gradient(40% 35% at 75% 85%, rgba(99,102,241,.14), transparent 65%),
+        radial-gradient(35% 30% at 15% 55%, rgba(34,211,238,.11), transparent 60%),
+        radial-gradient(30% 28% at 55% 10%, rgba(244,114,182,.10), transparent 58%);
+      animation: auroraDeepDrift 44s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+    @keyframes auroraDeepDrift{
+      0%  { transform:translate(0,0)          scale(1)    rotate(0deg);   }
+      33% { transform:translate(-3vw, 2vh)    scale(1.04) rotate(.6deg);  }
+      66% { transform:translate(2.5vw,-2.5vh) scale(0.97) rotate(-.5deg); }
+      100%{ transform:translate(-1.5vw, 3vh)  scale(1.06) rotate(.4deg);  }
+    }
 
     /* 3 · Floating ambient orbs */
     .orbs-layer{ position:fixed; inset:0; z-index:-4; pointer-events:none; overflow:hidden; }
     .orb{ position:absolute; border-radius:50%; filter:blur(50px); mix-blend-mode:screen; }
     .orb:nth-child(1){
-      width:480px; height:480px; top:-120px; left:-120px;
-      background:radial-gradient(circle, rgba(124,131,255,.22), transparent 70%);
+      width:560px; height:560px; top:-140px; left:-140px;
+      background:radial-gradient(circle, rgba(124,131,255,.26), transparent 70%);
       animation: orbDrift 26s ease-in-out infinite alternate;
     }
     .orb:nth-child(2){
-      width:380px; height:380px; top:35%; right:-100px;
-      background:radial-gradient(circle, rgba(34,211,238,.20), transparent 70%);
+      width:440px; height:440px; top:35%; right:-120px;
+      background:radial-gradient(circle, rgba(34,211,238,.24), transparent 70%);
       animation: orbDrift 20s ease-in-out infinite alternate-reverse;
       animation-delay:-8s;
     }
     .orb:nth-child(3){
-      width:420px; height:420px; bottom:-100px; left:25%;
-      background:radial-gradient(circle, rgba(52,211,153,.18), transparent 70%);
+      width:480px; height:480px; bottom:-120px; left:25%;
+      background:radial-gradient(circle, rgba(52,211,153,.20), transparent 70%);
       animation: orbDrift 24s ease-in-out infinite alternate;
       animation-delay:-15s;
     }
+    .orb:nth-child(4){
+      width:360px; height:360px; bottom:20%; right:20%;
+      background:radial-gradient(circle, rgba(244,114,182,.15), transparent 70%);
+      animation: orbDrift 30s ease-in-out infinite alternate;
+      animation-delay:-6s;
+    }
     @keyframes orbDrift{
       0%  { transform:translate(0,0)       scale(1);    opacity:.10; }
-      33% { transform:translate(40px,-30px) scale(1.08); opacity:.14; }
-      66% { transform:translate(-30px,40px) scale(.94);  opacity:.09; }
-      100%{ transform:translate(25px,15px)  scale(1.05); opacity:.12; }
+      33% { transform:translate(40px,-30px) scale(1.08); opacity:.16; }
+      66% { transform:translate(-30px,40px) scale(.94);  opacity:.10; }
+      100%{ transform:translate(25px,15px)  scale(1.05); opacity:.14; }
     }
 
     /* 4 · Noise grid (subtle depth) */
@@ -458,6 +483,31 @@
       animation: gridPulse 10s ease-in-out infinite alternate;
     }
     @keyframes gridPulse{ 0%{ opacity:.013; } 100%{ opacity:.030; } }
+
+    /* 4b · Shooting stars / meteor trails */
+    .meteors-layer{ position:fixed; inset:0; z-index:-3; pointer-events:none; overflow:hidden; }
+    .meteor-star{
+      position:absolute;
+      width:160px; height:2px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.95) 50%, rgba(124,131,255,.6) 80%, transparent 100%);
+      border-radius:50%;
+      opacity:0;
+      filter: drop-shadow(0 0 4px rgba(255,255,255,.9)) drop-shadow(0 0 14px rgba(124,131,255,.7));
+      transform: rotate(-35deg);
+      animation: meteorFly var(--dur,10s) var(--delay,0s) linear infinite;
+    }
+    .meteor-star:nth-child(1){ top:6%;  left:-180px; --dur:9s;  --delay:0s;   }
+    .meteor-star:nth-child(2){ top:22%; left:-180px; --dur:14s; --delay:4.5s; }
+    .meteor-star:nth-child(3){ top:45%; left:-180px; --dur:11s; --delay:8.2s; }
+    .meteor-star:nth-child(4){ top:68%; left:-180px; --dur:17s; --delay:2.1s; }
+    .meteor-star:nth-child(5){ top:14%; left:-180px; --dur:21s; --delay:13s;  }
+    @keyframes meteorFly{
+      0%  { transform: translateX(0)             rotate(-35deg); opacity:0;   }
+      4%  { opacity:1; }
+      80% { opacity:.5; }
+      90% { transform: translateX(calc(100vw + 200px)) rotate(-35deg); opacity:0; }
+      100%{ transform: translateX(calc(100vw + 200px)) rotate(-35deg); opacity:0; }
+    }
 
     /* 5 · Global mouse spotlight */
     .spotlight-global{
@@ -520,7 +570,7 @@
 
     /* Reduced-motion: hide new fx */
     @media(prefers-reduced-motion:reduce){
-      .aurora-global,.orb,.noise-grid,#bgCanvas{ animation:none !important; display:none !important; }
+      .aurora-global,.aurora-deep,.orb,.noise-grid,#bgCanvas,.meteors-layer{ animation:none !important; display:none !important; }
       .holo-shimmer{ display:none !important; }
       .glitch-title .gl1,.glitch-title .gl2{ display:none !important; }
       .section-title,.cheats-h2{
@@ -539,12 +589,21 @@
   <!-- Site-wide Background FX -->
   <canvas id="bgCanvas" aria-hidden="true"></canvas>
   <div class="aurora-global" aria-hidden="true"></div>
+  <div class="aurora-deep" aria-hidden="true"></div>
   <div class="orbs-layer" aria-hidden="true">
+    <div class="orb"></div>
     <div class="orb"></div>
     <div class="orb"></div>
     <div class="orb"></div>
   </div>
   <div class="noise-grid" aria-hidden="true"></div>
+  <div class="meteors-layer" aria-hidden="true">
+    <div class="meteor-star"></div>
+    <div class="meteor-star"></div>
+    <div class="meteor-star"></div>
+    <div class="meteor-star"></div>
+    <div class="meteor-star"></div>
+  </div>
   <div id="spotlightGlobal" class="spotlight-global" aria-hidden="true"></div>
 
   <!-- Progress bar -->
@@ -885,6 +944,30 @@
       }
       window.addEventListener('mousemove', e=>{ tx=e.clientX; ty=e.clientY; }, {passive:true});
       tick();
+    }();
+
+    /* ── 2b. AURORA MOUSE PARALLAX ───────────────────────────────────── */
+    !function(){
+      if(REDUCE) return;
+      const aurora = document.querySelector('.aurora-global');
+      const deep   = document.querySelector('.aurora-deep');
+      if(!aurora) return;
+      let tx=0, ty=0, cx=0, cy=0;
+      window.addEventListener('mousemove', e=>{
+        tx = (e.clientX / innerWidth  - .5) * 22;
+        ty = (e.clientY / innerHeight - .5) * 14;
+      }, {passive:true});
+      (function loop(){
+        cx += (tx-cx) * .035;
+        cy += (ty-cy) * .035;
+        aurora.style.marginLeft = cx.toFixed(2) + 'px';
+        aurora.style.marginTop  = cy.toFixed(2) + 'px';
+        if(deep){
+          deep.style.marginLeft = (-cx * .5).toFixed(2) + 'px';
+          deep.style.marginTop  = (-cy * .5).toFixed(2) + 'px';
+        }
+        requestAnimationFrame(loop);
+      })();
     }();
 
     /* ── 3. HEADER GLITCH TITLE ─────────────────────────────────────── */
