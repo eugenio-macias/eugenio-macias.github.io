@@ -252,7 +252,7 @@ title: Home
   }
   .card:hover{
     transform: translateY(-3px) rotateX(0.6deg) rotateY(-0.6deg) scale(1.02);
-    border-color:#2a2f39; box-shadow:0 22px 52px rgba(0,0,0,.45);
+    border-color:#2a2f39;
   }
   .card:hover::after{ opacity:.25; }
   .card:hover:before{
