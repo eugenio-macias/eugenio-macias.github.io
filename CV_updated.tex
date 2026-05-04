@@ -1,0 +1,141 @@
+\documentclass[10.5pt]{article}
+\usepackage[margin=0.5in, top=0.42in]{geometry} % Reduced top margin
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{parskip}
+\pagenumbering{gobble}
+
+% Custom hyperlink color (mylinkcolor = dark reddish-maroon)
+\usepackage[dvipsnames]{xcolor}
+\definecolor{mylinkcolor}{HTML}{8A2C3F}
+\usepackage[colorlinks=true, urlcolor=mylinkcolor]{hyperref}
+
+% Font Awesome for icons
+\usepackage{fontawesome5}
+
+% Bulletpoint and spacing tuning
+\setlist[itemize]{leftmargin=15pt, itemsep=0.5pt, topsep=0pt, parsep=0pt, label=\raisebox{0.25ex}{\tiny$\bullet$}} % smaller bullets
+
+% Smaller section titles
+\titleformat{\section}{\normalsize\bfseries}{}{0em}{}
+\titlespacing{\section}{0pt}{2pt}{1pt}
+
+\begin{document}
+
+% ===== HEADER =====
+\begin{center}
+    {\Large \textbf{Eugenio D. Macias}} \\
+    \makebox[\linewidth][c]{%
+  \faEnvelope\ \href{mailto:eugenio_macias_orozco@brown.edu}{eugenio\_macias\_orozco@brown.edu} \textbar\ 
+  \faPhone\ +1 (401) 346 3616 \textbar\ 
+  \faLinkedin\ \href{https://www.linkedin.com/in/eugenio-macias/}{LinkedIn} \textbar\ 
+  \faGlobe\ \href{https://xxelgenio0203xx.github.io/eugenio-macias.github.io/}{Personal Portfolio}%
+}
+\end{center}
+\vspace{1pt}
+\section*{\fontsize{11.5pt}{13pt}\selectfont\bfseries\MakeUppercase EDUCATION \hfill \normalsize GPA: 4.0}
+\vspace{1pt}
+\hrule
+\vspace{1pt}
+\textbf{Brown University},  \hfill Providence, RI \textbar \textit{Aug 2022 -- May 2026} \\
+\textit{B.S. Applied Mathematics--Computer Science} \textbf{(Honors)}, \textit{B.A. Mathematics} \\
+\textbf{United World College} (UWC) -- \textit{IB Diploma} \hfill Mostar, Bosnia \& Herzegovina \textbar\ \textit{Graduated May 2022}
+
+\vspace{2pt}
+\section*{\fontsize{11.5pt}{13pt}\selectfont\bfseries\MakeUppercase EXPERIENCE}
+\vspace{1pt}
+\hrule
+\vspace{1pt}
+% ---- Brown University ----
+\textbf{Brown University}, \textit{Karniadakis Lab} -- \textbf{Undergraduate Research Assistant} \hfill Providence, RI \textbar\ \textit{Jan 2026 -- Present} \\
+\textit{(Python, PyTorch, PINNs, L-BFGS-B, SSBroyden, Adam)} \hfill \href{https://github.com/eugenio-macias/DRP-Cahn-Hilliard-PINN}{\faGithub\ \texttt{DRP-Cahn-Hilliard-PINN}} \vspace{-7pt}
+\begin{itemize}
+  \item Benchmarking quasi-Newton optimizers (SSBroyden, L-BFGS-B) vs.\ Adam for PINNs on the 2D Cahn-Hilliard 4th-order phase-field PDE; analyzing convergence rates and loss landscape geometry
+\end{itemize}
+\textbf{Citi} -- \textbf{Quantitative Analyst Intern}: \textit{Equity Derivatives} \hfill NYC \textbar \textit{Jun 2025 -- Aug 2025} \vspace{-7pt}
+\begin{itemize}
+  \item Automated pricing diagnostics in a Python-C++ interface for exotic derivatives in EMEA, NAM, APAC books.
+  \item Validated live payoff fair values and Greeks via stochastic/local vol MC and PDE solvers; accelerated runtime by 2.5x
+  \item Obtained 1\textsuperscript{st} place (540+ participants) in Citi's firmwide ML Competition and 2\textsuperscript{nd} in internal market-making challenge
+  \item LightGBM+DART+SHAP with Bayesian optimization on 6M+ exotics notes; Swish NNs achieving lowest MSE
+\end{itemize}
+\textbf{Brown University} -- \textbf{Undergraduate Teaching Assistant} \hfill Providence, RI \textbar \textit{Aug 2025 -- Present} \vspace{-7pt}
+\begin{itemize}
+  \item \textit{APMA 1200 -- Operations Research} (Jan 2026--Present): Markov chains, Poisson processes, Martingales, Brownian motion
+  \item \textit{MATH 100 -- Calculus II} (Aug--Dec 2025): integration, sequences \& series, Taylor expansions, multivariable calculus
+\end{itemize}
+\textbf{D. E. Shaw \& Co.} -- \textit{Latitude Fellowship} \hfill NYC \textbar \textit{Apr 2024 -- May 2024} \vspace{-7pt}
+\begin{itemize}
+  \item Built airline sector revenue forecast via multivariate time-series regression in Python; achieved $R^2 = 0.87$ on test set
+  \item Explored alpha-generating signals and execution latency effects for equities and ETFs
+\end{itemize}
+\textbf{Buddywise AI} -- \textit{Founder's Associate Intern} \hfill Berlin, Germany \textbar \textit{May 2023 -- Jul 2023} \vspace{-7pt}
+\begin{itemize}
+  \item Researched and optimized datasets for ML pipelines in safety-critical computer vision; reduced processing time by 35\%
+  \item Secured \$50,000 in Mixpanel credits; improved A/B testing and UI KPI visibility by 40\%
+\end{itemize}
+\vspace{1pt}
+\section*{\fontsize{11.5pt}{13pt}\selectfont\bfseries\MakeUppercase PROJECTS \hfill \normalsize \href{https://eugenio-macias.github.io/projects}{\faGlobe\ Projects}}
+\vspace{1pt}
+\hrule
+\vspace{1pt}
+\textbf{Honors Senior Thesis}: \textbf{\textit{Weak-Form PDE Discovery for Stochastic Collective Dynamics}} \textbar\ \textit{Advisor: Prof. Bjorn Sandstede} \textit{(Python, PyTorch, JAX, SciPy)} \hfill \href{https://github.com/eugenio-macias/wsindy-manifold}{\faGithub\ \texttt{wsindy-manifold}} \textbar\ \href{https://eugenio-macias.github.io/Thesis.pdf}{\faFilePdf\ \texttt{Thesis}} \vspace{-7pt}
+\begin{itemize}
+  \item Applied \textbf{WSINDy} to discover interpretable coupled PDEs for macroscopic density evolution from noisy Vicsek-alignment + Morse attraction--repulsion trajectories; sparsity via MSTLS, integration via ETDRK4
+  \item Benchmarked against equation-free ROMs: FFT-aligned snapshots compressed by POD, evolved in latent space by \textbf{MVAR} and \textbf{LSTM}; evaluated across 7 dynamical regimes, 4 IC families, and multiple noise levels
+\end{itemize}
+\textbf{DRP -- Self-Scaled Quasi-Newton Methods for Physics-Informed Neural Networks} \textit{(Python, PyTorch, L-BFGS-B, SSBroyden)} \textbar\ \textit{Karniadakis Lab} \hfill \href{https://eugenio-macias.github.io/DRP_paper.pdf}{\faFilePdf\ \texttt{Paper}} \textbar\ \href{https://github.com/eugenio-macias/DRP-Cahn-Hilliard-PINN}{\faGithub\ \texttt{DRP-Cahn-Hilliard-PINN}} \vspace{-7pt}
+\begin{itemize}
+  \item Benchmarked self-scaled quasi-Newton optimizers (SSBroyden variants, L-BFGS-B) vs.\ Adam for PINNs on the 2D Cahn--Hilliard 4th-order phase-field PDE; best $\varepsilon_{L_2} = 0.258$ on $64^2$ grid (SSBroyden2)
+  \item Ran 100+ experiments (53 configurations, 3 seeds each); analyzed convergence rates and loss landscape geometry
+\end{itemize}
+\textbf{RL Research: Curiosity-Driven Transfer in ProcGen} \textit{(Python, PyTorch, PPO, ICM, RND, CFN)} \textbar\ \textit{Advisor: Prof. George Konidaris} \hfill \href{https://github.com/harshitaggarwal01/TransferRL}{\faGithub\ \texttt{TransferRL}} \textbar\ \href{https://eugenio-macias.github.io/Reintegrating_AI_Course__Curiosity_Driven_Transfer_Learning___Final_Paper.pdf}{\faFilePdf\ \texttt{Paper}} \vspace{-7pt}
+\begin{itemize}
+  \item Factorial sweep over four intrinsic signals (ICM, RND, CFN, NLL-Surprise) augmenting \textbf{PPO} with IMPALA-CNN on \textbf{ProcGen}; normalization (clip/RMS) and $\eta \in \{0.001\text{--}0.05\}$ as primary experimental variables
+  \item Zero-shot and fine-tuned transfer; dynamics-aware vs.\ coverage-only signals, 40\% cutoff, VLM-guided (CLIP) reward
+\end{itemize}
+\textbf{Hamiltonian \& Symplectic NNs for Charged Particle Dynamics} \textit{(PINNs, SympNets, PyTorch)} \hfill \href{https://eugenio-macias.github.io/assets/files/electron_dynamics_DL.pdf}{\faFilePdf\ \texttt{Paper}} \vspace{-7pt}
+\begin{itemize}
+  \item Poisson NNs with PDE residual loss learn Hamiltonian structure in EM fields; sub-0.007 MSE, 2\% parameter recovery
+  \item SympNets via Lie-Darboux transforms learn symplectomorphisms from trajectories, preserving phase-space volume
+\end{itemize}
+\textbf{Market-Neutral Long-Short Equity Strategy} \textit{(Python, Scikit-Learn, Pandas)} \hfill \href{https://eugenio-macias.github.io/ECON_1750_PCA\%20(1).pdf}{\faFilePdf\ \texttt{Paper}} \vspace{-7pt}
+\begin{itemize}
+  \item PCA factor decomposition on 5{,}000 equities; OLS idiosyncratic alpha residuals; dollar-neutral long-short top/bottom quintile; Sharpe 2.12 out-of-sample
+\end{itemize}
+\textbf{Research Paper}: Fourier Analysis and Laplace's Equation \textit{(LaTeX)} \hfill \href{https://eugenio-macias.github.io/assets/files/Extended_Essay.pdf}{\faFilePdf\ \texttt{Paper}} \vspace{-7pt}
+\begin{itemize}
+  \item Fourier series for Laplace's 2D BVP; four Dirichlet configs; $L^2$ convergence \& truncation error analysis (50 pp.)
+\end{itemize}
+\vspace{1pt}
+\section*{\fontsize{11.5pt}{13pt}\selectfont\bfseries\MakeUppercase AWARDS}
+\vspace{1pt}
+\hrule
+\vspace{1pt}
+\begin{minipage}[t]{0.48\linewidth}
+\begin{itemize}[itemsep=1pt]
+  \item \textbf{Shelby Davis Scholar}: Full tuition, Brown
+  \item \textbf{Sprint Award}: \$7,000 research internship grant
+  \item \textbf{Citadel} Invitational Terminal 2024
+  \item \textbf{Point72 \& Correlation1}: Data Scholar 2024
+\end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\linewidth}
+\begin{itemize}[itemsep=1pt]
+  \item \textbf{Sigma Xi}: Invited Member, Research Honor Society
+  \item \textbf{Bridgewater Associates}: Investment Immersion 2024
+  \item \textbf{PUTNAM 2024}: top 20\% nationwide
+  \item \textbf{IYMC}: Silver Medalist, Mathematics
+\end{itemize}
+\end{minipage}
+\vspace{1pt}
+\section*{\fontsize{11.5pt}{13pt}\selectfont\bfseries\MakeUppercase SKILLS \& INTERESTS \hfill \normalsize \faIcon{external-link-alt}\ \href{https://eugenio-macias.github.io/notes}{\textbf{\small Math Notes}}}
+\vspace{1pt}
+\hrule
+\vspace{1pt}
+\textbf{Skills}: Rapid quantitative intuition \& mental math; bullet chess (\textbf{2070} ELO); AI-accelerated research; socialization \\
+\textbf{Languages}: Spanish (native), English (native), German (B1), French (A2) \\
+\textbf{Interests}: \href{https://eugenio-macias.github.io/music-repertoire}{Classical Guitar} (\textbf{3\textsuperscript{rd}} National, Mexico), Running (\textbf{5} marathons), Travel (\textbf{45} countries), Asian food
+
+\end{document}

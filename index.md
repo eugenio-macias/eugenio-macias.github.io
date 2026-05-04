@@ -28,7 +28,7 @@ title: Home
     <!-- Intro -->
     <div class="intro">
       <h1 class="title">
-        <span class="badge">BS Applied Mathematics–Computer Science & BA Mathematics</span>
+        <span class="badge">BS Applied Mathematics–Computer Science (Honors) & BA Mathematics</span>
       </h1>
 
       <p class="typing" aria-label="Probability × Statistics × PDEs × ML">
@@ -40,15 +40,20 @@ title: Home
         <h2>About me</h2>
         <div class="text-bg">
           <p>
-            I’m an international student at Brown University. Currently in my senior year, I like to focus on the intersection of
-            <strong>probability</strong>, <strong>mathematical statistics</strong>, and <strong>differential equations</strong>
-            with <strong>machine learning and uncertainty quantification</strong>. I am interested in <em>measure-theoretic</em> analysis foundations with
-            <em>numerical methods</em> and <em>algorithm design</em> to build data-driven models. I’m currently writing a thesis on
-            <strong>Galerkin/Solobev weak-form PDE discovery for collective stochastic dynamics</strong>—developing sparse-regression (WSINDy) and
-            equation-free reduced order modeling approaches that recover governing laws from high-dimensional, Gaussian-noisy trajectories—methods directly applicable to
-            modeling <strong>dynamical systems & complex markets.</strong>.
-            Outside of math, I love <strong>♟ chess</strong>, <strong>🎸 classical guitar</strong>, <strong>✈️ traveling</strong>, and trying all kind of new food—
-            I’ve visited <strong>32 countries </strong>, starting from my IB at <strong>UWC Mostar in Bosnia and Herzegovina</strong>.
+            I'm an international student from Mexico at Brown University, graduating May 2026 with a
+            <strong>BS in Applied Mathematics–Computer Science (Honors)</strong> and a <strong>BA in Mathematics</strong>.
+            I focus on learning dynamical laws from imperfect data: <strong>probability-theory-grounded machine learning for PDEs</strong>,
+            <strong>Reinforcement Learning</strong>, <strong>Physics-Informed Deep Learning</strong>,
+            <strong>Stochastic Processes</strong>, and <strong>Uncertainty Quantification (UQ)</strong>.
+            My honors thesis (Advisor: Prof. Björn Sandstede) develops
+            <strong>shift-aligned reduced-order models</strong> (POD + MVAR/LSTM latent time-steppers) and
+            <strong>WSINDy weak-form PDE discovery</strong> for emergent collective agent dynamics in noisy Vicsek–Morse trajectories,
+            targeting identifiability and scalable sparse regression.
+            I also researched self-scaled quasi-Newton optimizers (SSBroyden) for PINNs in the Karniadakis Lab, and
+            curiosity-driven transfer learning (ICM, RND, PPO) with Prof. George Konidaris.
+            Outside of math, I love <strong>♟ chess</strong> (2070 ELO), <strong>🎸 classical guitar</strong>,
+            <strong>🏃 running</strong> (5 marathons), and <strong>✈️ traveling</strong>—
+            I've visited <strong>45 countries</strong>, starting from my IB at <strong>UWC Mostar in Bosnia and Herzegovina</strong>.
           </p>
         </div>
       </article>

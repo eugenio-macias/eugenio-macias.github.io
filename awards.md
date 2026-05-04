@@ -9,7 +9,17 @@ title: Awards
 
 <!-- Quant & Math first for recruiter signal -->
 ## Quant & Math Awards
+- **Sigma Xi, The Scientific Research Honor Society** — *Brown University Chapter*.  
+  Invited member; the oldest and largest scientific research honor society in the USA, recognizing distinguished achievement in research.
 
+- **1st Place — Citi Firm-Wide ML Quantitative Competition** — *Citi Markets, Summer 2025*.  
+  Ranked **1st out of 540+ participants** in Citi's internal ML competition.
+
+- **Sprint Award** — *Brown University*.  
+  **$7,000** research internship grant.
+
+- **Citadel Invitational Terminal (2024)** — *Citadel & Citadel Securities*.  
+  Selected for the Citadel Invitational Terminal algorithmic trading competition.
 - **D. E. Shaw Latitude Fellowship** — *The D. E. Shaw Group*.  
   Selected for the firm’s prestigious research fellowship.
 

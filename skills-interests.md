@@ -79,11 +79,14 @@ title: Skills
   <article class="glass card tilt interest" aria-label="Interests">
     <h2 class="card-title">Interests</h2>
     <ul class="interest-list">
-      <li><i class="fas fa-chess"></i> Competitive Chess — <span class="pill">2000+ Elo</span></li>
+      <li><i class="fas fa-chess"></i> Competitive Chess — <span class="pill">2070 ELO</span></li>
       <li><i class="fas fa-guitar"></i> Classical Guitar — <span class="pill">National 2nd in Mexico</span></li>
       <li><i class="fas fa-superscript"></i> Probability & Stochastic Processes</li>
       <li><i class="fas fa-chart-line"></i> Quantitative Strategies for Investing</li>
-      <li><i class="fas fa-utensils"></i> Trying New Food & Culinary Travel</li>
+      <li><i class="fas fa-running"></i> Running — <span class="pill">5 marathons</span></li>
+      <li><i class="fas fa-globe-asia"></i> Asian Food — <span class="pill">ramen · dim sum · Korean BBQ · mapo tofu · pho</span></li>
+      <li><i class="fas fa-users"></i> Meeting International People & Learning About Other Cultures</li>
+      <li><i class="fas fa-utensils"></i> Culinary Travel & Exploring Local Food Scenes</li>
     </ul>
   </article>
 
@@ -101,6 +104,10 @@ title: Skills
       <span class="flag-chip">🇩🇰</span>
       <!-- Newly added visited countries -->
       <span class="flag-chip">🇵🇭</span><span class="flag-chip">🇰🇷</span><span class="flag-chip">🇮🇳</span>
+      <span class="flag-chip">🇩🇴</span><span class="flag-chip">🇲🇳</span><span class="flag-chip">🇯🇵</span>
+      <span class="flag-chip">🇨🇳</span><span class="flag-chip">🇪🇪</span><span class="flag-chip">🇫🇮</span>
+      <span class="flag-chip">🇱🇻</span><span class="flag-chip">🇵🇱</span><span class="flag-chip">🇱🇹</span>
+      <span class="flag-chip">🇭🇰</span><span class="flag-chip">🇲🇴</span>
     </div>
     <p class="note">Currently at <strong><span id="visited-total">0</span> countries</strong> total traveled.</p>
   </article>
@@ -109,12 +116,11 @@ title: Skills
   <article class="glass card tilt flags" aria-label="Countries wishlist">
     <h2 class="card-title">Next on my list <span class="count" id="wish-count">(0)</span></h2>
     <div class="flag-grid wishlist" id="wishlist">
-      <!-- Keep your existing wishlist (minus SK + IN moved to visited), plus new requests -->
-      <span class="flag-chip">🇲🇳</span><span class="flag-chip">🇱🇧</span><span class="flag-chip">🇯🇵</span>
+      <!-- Keep your existing wishlist (minus moved-to-visited), plus new requests -->
+      <span class="flag-chip">🇱🇧</span>
       <span class="flag-chip">🇹🇭</span><span class="flag-chip">🇻🇳</span><span class="flag-chip">🇸🇬</span>
-      <span class="flag-chip">🇭🇰</span>
       <!-- Newly added wishlist countries -->
-      <span class="flag-chip">🇧🇷</span><span class="flag-chip">🇫🇮</span><span class="flag-chip">🇵🇱</span><span class="flag-chip">🇨🇷</span>
+      <span class="flag-chip">🇧🇷</span><span class="flag-chip">🇨🇷</span>
     </div>
   </article>
 

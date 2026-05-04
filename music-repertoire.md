@@ -317,7 +317,7 @@
         <section id="repertoire">
           <h2>Repertoire</h2>
           <ul class="data-list">
-            <li tabindex="0"><span class="composer">Francisco Tárrega (1852-1909), Spain:</span> <span class="piece">Recuerdos de la Alhambra, Lágrima, Capricho Árabe.</span></li>
+            <li tabindex="0"><span class="composer">Francisco Tárrega (1852-1909), Spain:</span> <span class="piece">Recuerdos de la Alhambra, Lágrima, Capricho Árabe, Malagueña.</span></li>
             <li tabindex="0"><span class="composer">Leo Brouwer (1939), Cuba:</span> <span class="piece">Un día de Noviembre, Etude No. 1.</span></li>
             <li tabindex="0"><span class="composer">Heitor Villa-lobos (1887-1959), Brazil:</span> <span class="piece">Choro No.1, Etude No. 1.</span></li>
             <li tabindex="0"><span class="composer">Erik Satié (1866-1925), France:</span> <span class="piece">Gymnopédie No.1, Gnossiene No.1.</span></li>

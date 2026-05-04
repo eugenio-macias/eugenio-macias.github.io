@@ -142,6 +142,19 @@ title: Cheat Sheets
     </div>
   </a>
 
+  <!-- WSIDY ROM -->
+  <a class="note-card" href="WSIDY_ROM.pdf" target="_blank" rel="noopener" title="WSINDy & Reduced-Order Models — Thesis Notes">
+    <div class="note-text">
+      <h3>WSINDy &amp; Reduced-Order Models — Thesis Notes</h3>
+      <p>Personal math reference compiled for the honors thesis (Advisor: Prof. Björn Sandstede). Covers the <strong>Weak SINDy (WSINDy)</strong> framework: weak-form PDE discovery via test-function convolution, MSTLS sparsity promotion, and ETDRK4 time integration. <strong>Equation-free ROMs</strong>: FFT-phase alignment of travelling-wave snapshots, POD basis construction, and latent-space time-stepping via <strong>MVAR</strong> (multivariate autoregression) and <strong>LSTM</strong> networks. Collective stochastic dynamics: Vicsek alignment + Morse attraction–repulsion agent models, empirical density estimation, and noise models for trajectory data. Identifiability vs. predictability trade-offs across dynamical regimes.</p>
+      <div class="note-meta"><span class="pill">PDF</span></div>
+    </div>
+    <div class="note-thumb">
+      <img src="{{ site.baseurl }}/assets/images/thumbnails/hi" alt="WSINDy ROM Thumbnail">
+      <div class="overlay">View PDF →</div>
+    </div>
+  </a>
+
   <!-- Applied Cryptography -->
   <a class="note-card" href="assets/files/Applied_Cyrptography.pdf" target="_blank" rel="noopener" title="Applied Cryptography">
     <div class="note-text">
@@ -160,6 +173,19 @@ title: Cheat Sheets
 <h2 class="cheats-h2">Probability, Statistics & Economics</h2>
 
 <div class="notes-grid">
+
+  <!-- APMA 2640 -->
+  <a class="note-card" href="Probability_TheoryII.pdf" target="_blank" rel="noopener" title="Probability Theory II (Graduate Level)">
+    <div class="note-text">
+      <h3>Probability Theory II (Graduate Level)</h3>
+      <p>Graduate-level sequel to measure-theoretic probability (APMA 2640, Youngtak Sohn, Spring 2026). Covers <strong>discrete-time martingales</strong>: optional stopping theorems, Doob's decomposition, maximal inequalities, L¹ convergence, backwards martingales, Hewitt–Savage 0–1 law, de Finetti's theorem, and branching processes. <strong>Weak convergence in Polish spaces</strong>: portmanteau lemma, Prokhorov's theorem, Skorokhod representation, multivariate CLT, finite-dimensional distributions, and Donsker's invariance principle. <strong>Brownian motion</strong>: construction, nowhere differentiability, Markov and strong Markov properties, continuous-time martingales, Strassen coupling, and an introduction to the <strong>Itô integral</strong>. References: Dembo, Chatterjee, Durrett, Liggett.</p>
+      <div class="note-meta"><span class="pill">PDF</span></div>
+    </div>
+    <div class="note-thumb">
+      <img src="{{ site.baseurl }}/assets/images/thumbnails/hi" alt="Probability Theory II Thumbnail">
+      <div class="overlay">View PDF →</div>
+    </div>
+  </a>
 
   <!-- APMA 2070 -->
   <a class="note-card" href="APMA 2070,  class notes.pdf" target="_blank" rel="noopener" title="Scientific Deep Learning (Graduate Level)">

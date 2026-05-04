@@ -86,6 +86,75 @@ title: Projects
   <h3 class="section-title">Featured</h3>
   <div class="projects-grid">
 
+    <!-- DRP — PINN Optimizer Study -->
+    <article class="project-card">
+      <div class="pc-text">
+        <h3 class="pc-title">DRP — Optimizing the Optimizer: Self-Scaled Quasi-Newton Methods for Physics-Informed Neural Networks</h3>
+        <p class="pc-sub">Spring 2026 · Brown Applied Mathematics · Karniadakis Lab · with Don C. Wong</p>
+        <p class="pc-desc">
+          PINNs on the 4th-order Cahn–Hilliard phase-separation PDE
+          ∂<sub>t</sub>U = D∇²(∇²U + a₂U + a₄U³) on [0,128]² face a severely ill-conditioned loss
+          κ(∇²ℒ) ≫ 1. We benchmark 6 quasi-Newton variants against Adam: BFGS, L-BFGS-B,
+          Self-Scaled BFGS (Oren–Luenberger &amp; Al-Baali), SSBroyden1, and SSBroyden2.
+          SSBroyden2 — combining a BFGS-direction Broyden-class update with automatic Hessian
+          self-scaling τ<sub>k</sub> ~ s<sub>k</sub>ᵀs<sub>k</sub>/y<sub>k</sub>ᵀs<sub>k</sub> —
+          achieves the lowest relative L₂ error on both domains: ε<sub>L₂</sub> = 0.854 on 128²
+          (vs. Adam 1.000) and ε<sub>L₂</sub> = 0.258 on 64² (best seed). 100+ experiments across
+          53 configurations and 3 seeds.
+        </p>
+        <details>
+          <summary>Key findings</summary>
+          <ul class="bullets">
+            <li>Adam warmup (500–1000 epochs) is essential for quasi-Newton secant-pair stability; zero warmup diverges.</li>
+            <li>Frequent collocation resampling (N<sub>change</sub> = 200 iters) prevents overfitting to fixed point sets on 128².</li>
+            <li>Power-law loss transform ℒ<sup>1/p</sup> (p = 4) flattens the loss landscape on 128² but is non-transferable to 64².</li>
+            <li>RAD sampling (k₂ = 0.5) focuses collocation on high-residual regions; combined modifications interfere non-additively.</li>
+            <li>Low collocation residual ≠ low ε<sub>L₂</sub>: physics-aware validation against ETDRK4 reference solver is necessary.</li>
+          </ul>
+        </details>
+        <div class="badges">
+          <span class="badge">PINNs</span><span class="badge">Quasi-Newton</span><span class="badge">Cahn–Hilliard</span>
+          <span class="badge">Self-Scaled BFGS</span><span class="badge">Optimization</span>
+        </div>
+        <div style="margin-top:10px; display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="{{ '/DRP_paper.pdf' | relative_url }}" target="_blank" rel="noopener" style="font-weight:700; background:linear-gradient(90deg,var(--grad1),var(--grad2)); -webkit-background-clip:text; background-clip:text; color:transparent;">View Paper →</a>
+          <a href="{{ '/DRP_poster.pdf' | relative_url }}" target="_blank" rel="noopener" style="font-weight:700; background:linear-gradient(90deg,var(--grad2),var(--grad3)); -webkit-background-clip:text; background-clip:text; color:transparent;">View Poster →</a>
+        </div>
+      </div>
+      <div class="pc-media">
+        <div class="hero-glow" style="opacity:.45;"></div>
+        <div class="hero-grid"></div>
+      </div>
+    </article>
+
+    <!-- RL Research — Curiosity-Driven Transfer -->
+    <article class="project-card">
+      <div class="pc-text">
+        <h3 class="pc-title">RL Research: Curiosity-Driven Transfer in ProcGen</h3>
+        <p class="pc-sub">2025–2026 · Brown University · Advisor: Prof. George Konidaris</p>
+        <p class="pc-desc">
+          Factorial sweep over four intrinsic motivation signals — <strong>ICM</strong> (forward/inverse
+          dynamics model), <strong>RND</strong> (random network distillation), <strong>CFN</strong>
+          (count-based feature novelty), and <strong>NLL-Surprise</strong> — augmenting PPO with an
+          IMPALA-CNN backbone on ProcGen. Normalization strategies (clip / RMS) and
+          η ∈ {0.001–0.05} as primary variables. Zero-shot and fine-tuned transfer evaluated at 40%
+          training cutoff; VLM-guided (CLIP) reward shaping explored for semantics-aware coverage.
+        </p>
+        <div class="badges">
+          <span class="badge">RL</span><span class="badge">PPO</span><span class="badge">Curiosity</span>
+          <span class="badge">Transfer Learning</span><span class="badge">ProcGen</span>
+        </div>
+        <div class="pc-links">
+          <a class="pc-link" href="https://github.com/harshitaggarwal01/TransferRL" target="_blank" rel="noopener"><i class="fab fa-github"></i> TransferRL</a>
+          <a class="pc-link" href="{{ '/Reintegrating_AI_Course__Curiosity_Driven_Transfer_Learning___Final_Paper.pdf' | relative_url }}" target="_blank" rel="noopener"><i class="fas fa-file-pdf"></i> Paper</a>
+        </div>
+      </div>
+      <div class="pc-media">
+        <div class="hero-glow" style="opacity:.35;"></div>
+        <div class="hero-grid"></div>
+      </div>
+    </article>
+
     <!-- Structure-Preserving DL -->
     <a class="project-card" href="assets/files/electron_dynamics_DL.pdf" target="_blank" rel="noopener">
       <div class="pc-text">
@@ -359,6 +428,9 @@ title: Projects
   .project-card .pc-sub{ margin:.1rem 0 .5rem; color:var(--muted); font-size:.92rem; }
   .project-card .pc-desc{ margin:0; color:var(--muted); }
   .project-card .pc-cta{ margin-top:.7rem; display:inline-block; font-weight:600; background:linear-gradient(90deg,var(--grad1),var(--grad2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .pc-links{ display:flex; gap:10px; flex-wrap:wrap; margin-top:.65rem; }
+  .pc-link{ display:inline-flex; align-items:center; gap:5px; padding:5px 12px; border-radius:999px; font-size:.85rem; font-weight:700; text-decoration:none; border:1px solid var(--line); color:var(--muted); transition:color .18s ease, border-color .18s ease, background .18s ease; }
+  .pc-link:hover{ color:var(--ink); border-color:var(--grad1); background:rgba(124,131,255,.08); }
   .project-card .pc-media{ position:relative; border-radius:12px; overflow:hidden; border:1px solid var(--line); background:#0b0c0e; min-height:150px; }
   .project-card .pc-media img{ width:100%; height:100%; max-height:190px; object-fit:cover; display:block; transform:scale(1.02); opacity:.93; transition:transform .35s ease, opacity .35s ease; }
   .project-card:hover .pc-media img{ transform:scale(1.06); opacity:1; }

@@ -388,10 +388,165 @@
       .page-transition, header, footer, #content { transition: none !important; animation: none !important; }
       .cursor-ring{ display:none !important; }
     }
+
+    /* ================================================================
+       SITE-WIDE FX v2
+       ================================================================ */
+
+    /* 1 · Interactive particle canvas */
+    #bgCanvas{
+      position:fixed; inset:0; width:100%; height:100%;
+      z-index:-5; pointer-events:none; display:block;
+    }
+
+    /* 2 · Aurora nebula (all pages) */
+    .aurora-global{
+      position:fixed; inset:-20%; z-index:-4; pointer-events:none;
+      filter:blur(70px) saturate(130%);
+      background:
+        radial-gradient(65% 55% at 18% 12%, rgba(124,131,255,.17), transparent 65%),
+        radial-gradient(50% 50% at 85% 22%, rgba(34,211,238,.13), transparent 62%),
+        radial-gradient(58% 52% at 48% 88%, rgba(52,211,153,.10), transparent 70%),
+        radial-gradient(38% 32% at 68% 58%, rgba(245,158,11,.07), transparent 65%);
+      animation: auroraGlobalDrift 32s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+    @keyframes auroraGlobalDrift{
+      0%  { transform:translate(0,0)         scale(1)    rotate(0deg);  }
+      20% { transform:translate(2vw,-1.5vh)  scale(1.03) rotate(.4deg); }
+      40% { transform:translate(-1.5vw,2vh)  scale(1.01) rotate(-.3deg);}
+      60% { transform:translate(2.5vw,-1vh)  scale(1.04) rotate(.5deg); }
+      80% { transform:translate(-2vw,1.5vh)  scale(1.02) rotate(-.4deg);}
+      100%{ transform:translate(3vw,-2vh)    scale(1.05) rotate(.6deg); }
+    }
+
+    /* 3 · Floating ambient orbs */
+    .orbs-layer{ position:fixed; inset:0; z-index:-4; pointer-events:none; overflow:hidden; }
+    .orb{ position:absolute; border-radius:50%; filter:blur(50px); mix-blend-mode:screen; }
+    .orb:nth-child(1){
+      width:480px; height:480px; top:-120px; left:-120px;
+      background:radial-gradient(circle, rgba(124,131,255,.22), transparent 70%);
+      animation: orbDrift 26s ease-in-out infinite alternate;
+    }
+    .orb:nth-child(2){
+      width:380px; height:380px; top:35%; right:-100px;
+      background:radial-gradient(circle, rgba(34,211,238,.20), transparent 70%);
+      animation: orbDrift 20s ease-in-out infinite alternate-reverse;
+      animation-delay:-8s;
+    }
+    .orb:nth-child(3){
+      width:420px; height:420px; bottom:-100px; left:25%;
+      background:radial-gradient(circle, rgba(52,211,153,.18), transparent 70%);
+      animation: orbDrift 24s ease-in-out infinite alternate;
+      animation-delay:-15s;
+    }
+    @keyframes orbDrift{
+      0%  { transform:translate(0,0)       scale(1);    opacity:.10; }
+      33% { transform:translate(40px,-30px) scale(1.08); opacity:.14; }
+      66% { transform:translate(-30px,40px) scale(.94);  opacity:.09; }
+      100%{ transform:translate(25px,15px)  scale(1.05); opacity:.12; }
+    }
+
+    /* 4 · Noise grid (subtle depth) */
+    .noise-grid{
+      position:fixed; inset:0; z-index:-3; pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.55) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.55) 1px, transparent 1px);
+      background-size: 88px 88px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%);
+      animation: gridPulse 10s ease-in-out infinite alternate;
+    }
+    @keyframes gridPulse{ 0%{ opacity:.013; } 100%{ opacity:.030; } }
+
+    /* 5 · Global mouse spotlight */
+    .spotlight-global{
+      position:fixed; inset:0; z-index:-2; pointer-events:none;
+      background:radial-gradient(700px circle at var(--gx,50%) var(--gy,50%),
+        rgba(124,131,255,.055) 0%,
+        rgba(34,211,238,.025) 40%,
+        transparent 70%);
+    }
+
+    /* 6 · Holographic shimmer (injected via JS into every card) */
+    .holo-shimmer{
+      position:absolute; inset:0; border-radius:inherit;
+      pointer-events:none; z-index:20; opacity:0;
+      mix-blend-mode:screen; transition:opacity .28s ease;
+    }
+
+    /* 7 · Header glitch */
+    .glitch-title{ position:relative; display:inline-block; }
+    .glitch-title .gl1,
+    .glitch-title .gl2{
+      position:absolute; inset:0; pointer-events:none;
+      background:linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      opacity:0;
+    }
+    .glitch-title .gl1{ animation: glitchA  9s 0s   infinite linear; }
+    .glitch-title .gl2{ animation: glitchB 11s 1.5s infinite linear; }
+    @keyframes glitchA{
+      0%,88%,100%{ clip-path:none; transform:none; opacity:0; }
+      90%{ clip-path:polygon(0 25%,100% 25%,100% 42%,0 42%); transform:translate(-3px,0); opacity:.75; }
+      92%{ clip-path:polygon(0 60%,100% 60%,100% 72%,0 72%); transform:translate( 3px,0); opacity:.65; }
+      94%{ clip-path:polygon(0 42%,100% 42%,100% 58%,0 58%); transform:translate(-1px,0); opacity:.55; }
+      96%{ clip-path:none; transform:none; opacity:0; }
+    }
+    @keyframes glitchB{
+      0%,82%,100%{ clip-path:none; transform:none; opacity:0; }
+      84%{ clip-path:polygon(0 50%,100% 50%,100% 65%,0 65%); transform:translate( 2px,0); opacity:.65; }
+      86%{ clip-path:polygon(0 15%,100% 15%,100% 32%,0 32%); transform:translate(-2px,0); opacity:.60; }
+      88%{ clip-path:none; transform:none; opacity:0; }
+    }
+
+    /* 8 · Animated gradient on section titles */
+    .section-title, .cheats-h2{
+      background: linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3),var(--accent1)) !important;
+      background-size: 300% 100% !important;
+      -webkit-background-clip: text !important;
+      background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      color: transparent !important;
+      animation: gradientShift 6s linear infinite !important;
+    }
+    @keyframes gradientShift{ 0%{ background-position:0% 50%; } 100%{ background-position:300% 50%; } }
+
+    /* 9 · Click burst dot */
+    .burst-dot{
+      position:fixed; width:5px; height:5px; border-radius:50%;
+      pointer-events:none; z-index:9998; transform:translate(-50%,-50%);
+    }
+
+    /* Reduced-motion: hide new fx */
+    @media(prefers-reduced-motion:reduce){
+      .aurora-global,.orb,.noise-grid,#bgCanvas{ animation:none !important; display:none !important; }
+      .holo-shimmer{ display:none !important; }
+      .glitch-title .gl1,.glitch-title .gl2{ display:none !important; }
+      .section-title,.cheats-h2{
+        animation:none !important;
+        background:none !important;
+        color:var(--ink) !important;
+        -webkit-text-fill-color:var(--ink) !important;
+        -webkit-background-clip:unset !important;
+        background-clip:unset !important;
+      }
+    }
   </style>
 </head>
 
 <body>
+  <!-- Site-wide Background FX -->
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <div class="aurora-global" aria-hidden="true"></div>
+  <div class="orbs-layer" aria-hidden="true">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+  </div>
+  <div class="noise-grid" aria-hidden="true"></div>
+  <div id="spotlightGlobal" class="spotlight-global" aria-hidden="true"></div>
+
   <!-- Progress bar -->
   <div class="scroll-progress" id="scrollProgress"></div>
 
@@ -405,7 +560,7 @@
     <div class="header-links-left">
       <a href="https://www.linkedin.com/in/eugenio-macias/" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
       <a href="mailto:eugenio_macias_orozco@brown.edu" target="_blank" rel="noopener" title="Email"><i class="fas fa-envelope"></i></a>
-      <a href="{{ '/assets/files/resume_fall2025.pdf' | relative_url }}" target="_blank" rel="noopener" title="Resume"><i class="fas fa-file-alt"></i></a>
+      <a href="{{ '/CV_updated.pdf' | relative_url }}" target="_blank" rel="noopener" title="Resume / CV"><i class="fas fa-file-alt"></i></a>
     </div>
     <h1>{{ site.title }}</h1>
     <div class="header-links-right">
@@ -645,6 +800,189 @@
         });
       }
     })();
+  </script>
+
+  <!-- ============================================================
+       SITE-WIDE FX v2 — particle network · glitch · tilt · scramble · burst
+       ============================================================ -->
+  <script>
+  (function () {
+    'use strict';
+    const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const ACCENT  = ['#7c83ff','#22d3ee','#34d399','#a78bfa','#f472b6','#60a5fa'];
+
+    /* ── 1. INTERACTIVE PARTICLE NETWORK ──────────────────────────── */
+    !function () {
+      const canvas = document.getElementById('bgCanvas');
+      if (!canvas || REDUCE) return;
+      const ctx = canvas.getContext('2d');
+      let W, H;
+      function resize(){ W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
+      resize();
+      window.addEventListener('resize', resize, { passive:true });
+
+      let mX = W/2, mY = H/2;
+      window.addEventListener('mousemove', e=>{ mX=e.clientX; mY=e.clientY; }, {passive:true});
+
+      const N   = Math.min(Math.floor(W * H / 9500), 115);
+      const LNK = 140, ATT = 200, FORCE = 0.012;
+      const pts = Array.from({length:N}, ()=>{
+        const a = Math.random()*Math.PI*2, spd = .2+Math.random()*.35;
+        return { x:Math.random()*W, y:Math.random()*H,
+                 vx:Math.cos(a)*spd, vy:Math.sin(a)*spd,
+                 r:1.2+Math.random()*1.8,
+                 c:ACCENT[Math.floor(Math.random()*ACCENT.length)],
+                 a:.25+Math.random()*.45 };
+      });
+
+      function frame(){
+        ctx.clearRect(0,0,W,H);
+        for(let i=0; i<pts.length; i++){
+          const p = pts[i];
+          // mouse attraction
+          const adx=mX-p.x, ady=mY-p.y, ad=Math.sqrt(adx*adx+ady*ady);
+          if(ad<ATT){ const f=(1-ad/ATT)*FORCE; p.vx+=adx*f; p.vy+=ady*f; }
+          // damping + cap
+          p.vx*=.985; p.vy*=.985;
+          const spd=Math.sqrt(p.vx*p.vx+p.vy*p.vy);
+          if(spd>1.6){ p.vx=p.vx/spd*1.6; p.vy=p.vy/spd*1.6; }
+          p.x+=p.vx; p.y+=p.vy;
+          // wrap
+          if(p.x<0) p.x+=W; else if(p.x>W) p.x-=W;
+          if(p.y<0) p.y+=H; else if(p.y>H) p.y-=H;
+          // dot
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+          ctx.fillStyle=p.c; ctx.globalAlpha=p.a; ctx.fill();
+          // connections
+          for(let j=i+1; j<pts.length; j++){
+            const q=pts[j], dx=p.x-q.x, dy=p.y-q.y;
+            if(Math.abs(dx)>LNK||Math.abs(dy)>LNK) continue;
+            const d=Math.sqrt(dx*dx+dy*dy);
+            if(d<LNK){
+              ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y);
+              ctx.strokeStyle=p.c; ctx.globalAlpha=(1-d/LNK)*.18;
+              ctx.lineWidth=.8; ctx.stroke();
+            }
+          }
+        }
+        ctx.globalAlpha=1;
+        if(!document.hidden) requestAnimationFrame(frame);
+      }
+      document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) requestAnimationFrame(frame); });
+      requestAnimationFrame(frame);
+    }();
+
+    /* ── 2. GLOBAL MOUSE SPOTLIGHT ─────────────────────────────────── */
+    !function(){
+      const el = document.getElementById('spotlightGlobal');
+      if(!el) return;
+      let tx=innerWidth/2, ty=innerHeight/2, cx=tx, cy=ty;
+      function tick(){
+        cx+=(tx-cx)*.08; cy+=(ty-cy)*.08;
+        el.style.setProperty('--gx', cx+'px');
+        el.style.setProperty('--gy', cy+'px');
+        requestAnimationFrame(tick);
+      }
+      window.addEventListener('mousemove', e=>{ tx=e.clientX; ty=e.clientY; }, {passive:true});
+      tick();
+    }();
+
+    /* ── 3. HEADER GLITCH TITLE ─────────────────────────────────────── */
+    !function(){
+      const h1 = document.querySelector('header h1');
+      if(!h1) return;
+      h1.classList.add('glitch-title');
+      const txt = h1.firstChild && h1.firstChild.nodeType===3 ? h1.firstChild.nodeValue.trim() : h1.textContent.trim();
+      ['gl1','gl2'].forEach(cls=>{
+        const s = document.createElement('span');
+        s.className=cls; s.setAttribute('aria-hidden','true'); s.textContent=txt;
+        h1.appendChild(s);
+      });
+    }();
+
+    /* ── 4. 3D CARD TILT + HOLOGRAPHIC SHIMMER ──────────────────────── */
+    !function(){
+      if(REDUCE || navigator.maxTouchPoints>0) return;
+      // Pre-mark home-page [data-tilt] elements — they have their own tilt handler
+      document.querySelectorAll('[data-tilt]').forEach(el=>el.dataset.tiltInit='1');
+
+      function initTilt(el){
+        if(el.dataset.tiltInit) return;
+        el.dataset.tiltInit='1';
+        if(getComputedStyle(el).position==='static') el.style.position='relative';
+        const shimmer = document.createElement('div');
+        shimmer.className='holo-shimmer';
+        el.appendChild(shimmer);
+
+        el.addEventListener('mousemove', e=>{
+          const r=el.getBoundingClientRect();
+          const x=(e.clientX-r.left)/r.width, y=(e.clientY-r.top)/r.height;
+          const rx=(y-.5)*-12, ry=(x-.5)*12;
+          el.style.transition='transform .08s ease,box-shadow .22s ease';
+          el.style.transform=`perspective(900px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) scale(1.018) translateZ(4px)`;
+          el.style.boxShadow=`0 0 0 1px rgba(124,131,255,.32),0 0 28px rgba(124,131,255,.11),0 24px 60px rgba(0,0,0,.46)`;
+          shimmer.style.background=`radial-gradient(140px 140px at ${(x*100).toFixed(1)}% ${(y*100).toFixed(1)}%,rgba(255,255,255,.17) 0%,rgba(124,131,255,.08) 45%,transparent 72%)`;
+          shimmer.style.opacity='1';
+        }, {passive:true});
+
+        el.addEventListener('mouseleave', ()=>{
+          el.style.transition='transform .4s cubic-bezier(.25,.46,.45,.94),box-shadow .4s ease';
+          el.style.transform=''; el.style.boxShadow='';
+          shimmer.style.opacity='0';
+        });
+      }
+
+      function scan(){ document.querySelectorAll('.card,.glass,.note-card,.tilt-card,.glass.card').forEach(initTilt); }
+      scan();
+      const mo = new MutationObserver(scan);
+      const content = document.getElementById('content');
+      if(content) mo.observe(content, {childList:true, subtree:true});
+    }();
+
+    /* ── 5. TEXT SCRAMBLE on scroll-reveal ──────────────────────────── */
+    !function(){
+      if(REDUCE) return;
+      const CHARS='ABCDEFGHIJKLMNOPQRSTUVWXYZ∑∫∂∇αβγδεζθλμπσφψω#$%01289';
+      function scramble(el){
+        const orig = el.dataset.sOrig || el.textContent;
+        el.dataset.sOrig = orig;
+        let f=0; const total=orig.length*2|0;
+        const iv = setInterval(()=>{
+          el.textContent = orig.split('').map((ch,i)=>{
+            if(ch===' '||ch==='\n') return ch;
+            return i<((f/2)|0) ? ch : CHARS[Math.floor(Math.random()*CHARS.length)];
+          }).join('');
+          if(++f>=total){ el.textContent=orig; clearInterval(iv); }
+        }, 28);
+      }
+      const obs = new IntersectionObserver(entries=>{
+        entries.forEach(e=>{ if(e.isIntersecting){ scramble(e.target); obs.unobserve(e.target); } });
+      }, {threshold:.6});
+      document.querySelectorAll('h2,h3').forEach(h=>{
+        if(!h.closest('header') && !h.closest('footer') && h.children.length===0) obs.observe(h);
+      });
+    }();
+
+    /* ── 6. CLICK BURST ──────────────────────────────────────────────── */
+    !function(){
+      document.addEventListener('click', e=>{
+        for(let i=0; i<14; i++){
+          const dot = document.createElement('div');
+          dot.className='burst-dot';
+          const c = ACCENT[Math.floor(Math.random()*ACCENT.length)];
+          dot.style.cssText=`left:${e.clientX}px;top:${e.clientY}px;background:${c};box-shadow:0 0 6px 1px ${c};`;
+          document.body.appendChild(dot);
+          const ang=(i/14)*Math.PI*2+Math.random()*.4, dist=55+Math.random()*70;
+          dot.animate([
+            {transform:'translate(-50%,-50%) scale(1.4)', opacity:1},
+            {transform:`translate(calc(-50% + ${(Math.cos(ang)*dist).toFixed(0)}px),calc(-50% + ${(Math.sin(ang)*dist).toFixed(0)}px)) scale(0)`,opacity:0}
+          ],{duration:500+Math.random()*350, easing:'cubic-bezier(.25,.46,.45,.94)', fill:'forwards'})
+            .finished.then(()=>dot.remove());
+        }
+      });
+    }();
+
+  })();
   </script>
 </body>
 </html>
