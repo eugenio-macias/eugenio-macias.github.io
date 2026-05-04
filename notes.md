@@ -143,7 +143,7 @@ title: Cheat Sheets
   </a>
 
   <!-- WSIDY ROM -->
-  <a class="note-card" href="WSIDY_ROM.pdf" target="_blank" rel="noopener" title="WSINDy & Reduced-Order Models — Thesis Notes">
+  <a class="note-card" href="ROM-WSINDy.pdf" target="_blank" rel="noopener" title="WSINDy &amp; Reduced-Order Models — Thesis Notes">
     <div class="note-text">
       <h3>WSINDy &amp; Reduced-Order Models — Thesis Notes</h3>
       <p>Personal math reference compiled for the honors thesis (Advisor: Prof. Björn Sandstede). Covers the <strong>Weak SINDy (WSINDy)</strong> framework: weak-form PDE discovery via test-function convolution, MSTLS sparsity promotion, and ETDRK4 time integration. <strong>Equation-free ROMs</strong>: FFT-phase alignment of travelling-wave snapshots, POD basis construction, and latent-space time-stepping via <strong>MVAR</strong> (multivariate autoregression) and <strong>LSTM</strong> networks. Collective stochastic dynamics: Vicsek alignment + Morse attraction–repulsion agent models, empirical density estimation, and noise models for trajectory data. Identifiability vs. predictability trade-offs across dynamical regimes.</p>
