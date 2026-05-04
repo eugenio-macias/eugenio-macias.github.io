@@ -51,9 +51,11 @@
     body{
       margin:0;
       background:
-        radial-gradient(1200px 800px at 10% -10%, rgba(124,131,255,.08), transparent 60%),
-        radial-gradient(1000px 700px at 110% 10%, rgba(34,211,238,.08), transparent 60%),
+        radial-gradient(rgba(255,255,255,.032) 1px, transparent 1px),
+        radial-gradient(1200px 800px at 10% -10%, rgba(124,131,255,.09), transparent 60%),
+        radial-gradient(1000px 700px at 110% 10%, rgba(34,211,238,.09), transparent 60%),
         var(--bg);
+      background-size: 28px 28px, auto, auto, auto;
       color:var(--ink);
       font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
       overflow-x:hidden;
@@ -426,25 +428,44 @@
       100%{ transform:translate(-2vw,2vh); }
     }
 
+    /* 2c · Slow-rotating conic aurora ring — pure GPU transform, zero repaint */
+    .aurora-ring{
+      position:fixed; inset:-15%; z-index:-5; pointer-events:none;
+      contain: strict;
+      background: conic-gradient(from 0deg at 30% 60%,
+        rgba(124,131,255,.07),
+        rgba(34,211,238,.05),
+        rgba(52,211,153,.06),
+        rgba(244,114,182,.05),
+        rgba(245,158,11,.04),
+        transparent 50%,
+        rgba(124,131,255,.07));
+      animation: ringRotate 80s linear infinite;
+      will-change: transform;
+    }
+    @keyframes ringRotate{ to{ transform: rotate(360deg); } }
+
     /* 3 · Ambient orbs — no blur, pure opacity fade = zero repaint */
     .orbs-layer{ position:fixed; inset:0; z-index:-4; pointer-events:none; overflow:hidden; contain: strict; }
     .orb{ position:absolute; border-radius:50%; mix-blend-mode:screen; }
     .orb:nth-child(1){
       width:600px; height:600px; top:-150px; left:-150px;
-      background:radial-gradient(circle, rgba(124,131,255,.16) 0%, transparent 68%);
-      animation: orbFade 28s ease-in-out infinite alternate;
+      background:radial-gradient(circle, rgba(124,131,255,.18) 0%, transparent 68%);
+      animation: orbFade 28s ease-in-out infinite alternate, orbDrift1 34s ease-in-out infinite alternate;
     }
     .orb:nth-child(2){
       width:500px; height:500px; bottom:-130px; right:-130px;
-      background:radial-gradient(circle, rgba(34,211,238,.14) 0%, transparent 68%);
-      animation: orbFade 22s ease-in-out infinite alternate-reverse;
-      animation-delay:-11s;
+      background:radial-gradient(circle, rgba(34,211,238,.16) 0%, transparent 68%);
+      animation: orbFade 22s ease-in-out infinite alternate-reverse, orbDrift2 40s ease-in-out infinite alternate;
+      animation-delay:-11s, -20s;
     }
     .orb:nth-child(3), .orb:nth-child(4){ display:none; }
     @keyframes orbFade{
       0%  { opacity:.7; }
       100%{ opacity:.3; }
     }
+    @keyframes orbDrift1{ 0%{ transform:translate(0,0); } 100%{ transform:translate(100px,70px); } }
+    @keyframes orbDrift2{ 0%{ transform:translate(0,0); } 100%{ transform:translate(-90px,-55px); } }
 
     /* 4 · Noise grid removed for performance */
     .noise-grid{ display:none !important; }
@@ -568,7 +589,7 @@
 
     /* Reduced-motion: hide new fx */
     @media(prefers-reduced-motion:reduce){
-      .aurora-global,.aurora-deep,.orb,.noise-grid,#bgCanvas,.meteors-layer,.scan-beam{ animation:none !important; display:none !important; }
+      .aurora-global,.aurora-deep,.aurora-ring,.orb,.noise-grid,#bgCanvas,.meteors-layer,.scan-beam{ animation:none !important; display:none !important; }
       .holo-shimmer{ display:none !important; }
       .glitch-title .gl1,.glitch-title .gl2{ display:none !important; }
       .project-card:hover,.note-card:hover{ animation:none !important; }
@@ -589,6 +610,7 @@
   <canvas id="bgCanvas" aria-hidden="true" style="display:none"></canvas>
   <div class="aurora-global" aria-hidden="true"></div>
   <div class="aurora-deep" aria-hidden="true"></div>
+  <div class="aurora-ring" aria-hidden="true"></div>
   <div class="orbs-layer" aria-hidden="true">
     <div class="orb"></div>
     <div class="orb"></div>
@@ -911,8 +933,6 @@
     /* ── 4. 3D CARD TILT + HOLOGRAPHIC SHIMMER ──────────────────────── */
     !function(){
       if(REDUCE || navigator.maxTouchPoints>0) return;
-      // Pre-mark home-page [data-tilt] elements — they have their own tilt handler
-      document.querySelectorAll('[data-tilt]').forEach(el=>el.dataset.tiltInit='1');
 
       function initTilt(el){
         if(el.dataset.tiltInit) return;
@@ -921,26 +941,31 @@
         const shimmer = document.createElement('div');
         shimmer.className='holo-shimmer';
         el.appendChild(shimmer);
+        const ownTilt = el.hasAttribute('data-tilt'); // page-level handler owns the transform
 
         el.addEventListener('mousemove', e=>{
           const r=el.getBoundingClientRect();
           const x=(e.clientX-r.left)/r.width, y=(e.clientY-r.top)/r.height;
-          const rx=(y-.5)*-12, ry=(x-.5)*12;
-          el.style.transition='transform .08s ease,box-shadow .22s ease';
-          el.style.transform=`perspective(900px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) scale(1.018) translateZ(4px)`;
-          el.style.boxShadow=`0 0 0 1px rgba(124,131,255,.32),0 0 28px rgba(124,131,255,.11),0 24px 60px rgba(0,0,0,.46)`;
           shimmer.style.background=`radial-gradient(140px 140px at ${(x*100).toFixed(1)}% ${(y*100).toFixed(1)}%,rgba(255,255,255,.17) 0%,rgba(124,131,255,.08) 45%,transparent 72%)`;
           shimmer.style.opacity='1';
+          if(!ownTilt){
+            const rx=(y-.5)*-12, ry=(x-.5)*12;
+            el.style.transition='transform .08s ease,box-shadow .22s ease';
+            el.style.transform=`perspective(900px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) scale(1.018) translateZ(4px)`;
+            el.style.boxShadow=`0 0 0 1px rgba(124,131,255,.32),0 0 28px rgba(124,131,255,.11),0 24px 60px rgba(0,0,0,.46)`;
+          }
         }, {passive:true});
 
         el.addEventListener('mouseleave', ()=>{
-          el.style.transition='transform .4s cubic-bezier(.25,.46,.45,.94),box-shadow .4s ease';
-          el.style.transform=''; el.style.boxShadow='';
           shimmer.style.opacity='0';
+          if(!ownTilt){
+            el.style.transition='transform .4s cubic-bezier(.25,.46,.45,.94),box-shadow .4s ease';
+            el.style.transform=''; el.style.boxShadow='';
+          }
         });
       }
 
-      function scan(){ document.querySelectorAll('.card,.glass,.note-card,.tilt-card,.glass.card').forEach(initTilt); }
+      function scan(){ document.querySelectorAll('.card,.glass,.note-card,.tilt-card,.glass.card,.project-card,[data-tilt]').forEach(initTilt); }
       scan();
       const mo = new MutationObserver(scan);
       const content = document.getElementById('content');
