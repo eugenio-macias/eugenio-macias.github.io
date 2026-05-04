@@ -269,8 +269,7 @@
       position:absolute; inset:-40% -10%;
       background: conic-gradient(from 0deg at 50% 50%, var(--c1), var(--c2), var(--c3), var(--c1));
       animation: spin 9s linear infinite;
-      filter: blur(26px) saturate(140%);
-      opacity:.35;
+      opacity:.22;
       z-index:0;
     }
     @keyframes spin{ to{ transform: rotate(360deg); } }
@@ -284,16 +283,15 @@
         radial-gradient(160% 240% at 50% 120%, var(--c3) 0%, transparent 60%);
       background-size: 200% 200%, 200% 200%, 200% 200%;
       background-position: 0% 50%, 100% 50%, 50% 100%;
-      filter: blur(20px) saturate(200%);
       mix-blend-mode: screen;
-      opacity:.85;
+      opacity:.55;
       animation: fluxShift 6.6s ease-in-out infinite alternate;
       z-index:1;
     }
     @keyframes fluxShift{
-      0%  { background-position: 0% 50%, 100% 50%, 50% 100%; transform: scale(1); }
-      50% { background-position: 50% 0%, 50% 100%, 0% 50%;   transform: scale(1.02); }
-      100%{ background-position: 100% 50%, 0% 50%, 50% 0%;  transform: scale(1.04); }
+      0%  { background-position: 0% 50%, 100% 50%, 50% 100%; }
+      50% { background-position: 50% 0%, 50% 100%, 0% 50%; }
+      100%{ background-position: 100% 50%, 0% 50%, 50% 0%; }
     }
 
     /* starry sparkles */
@@ -350,8 +348,8 @@
     footer li a:hover::after{ opacity:1; }
     footer li a:hover .sheen{ opacity:1; animation: sweep .9s ease; }
     footer li a:hover .scan{ opacity:.35; }
-    footer li a:hover .rainbow{ animation-duration: 6.5s; filter: blur(24px) saturate(160%); }
-    footer li a:hover .flux{ animation-duration: 3.2s; filter: blur(18px) saturate(230%); }
+    footer li a:hover .rainbow{ animation-duration: 6.5s; opacity:.32; }
+    footer li a:hover .flux{ animation-duration: 3.2s; opacity:.72; }
     footer li a:hover .sparks{ animation-duration: 1.6s; }
 
     @keyframes sweep{ from{ left:-50%; } to{ left:130%; } }
@@ -887,12 +885,11 @@
           spotlight.style.setProperty('--gx', scx.toFixed(0)+'px');
           spotlight.style.setProperty('--gy', scy.toFixed(0)+'px');
         }
-        // aurora parallax
+        // aurora parallax — use transform (GPU composited, no layout)
         if(aurora){
           acx+=(atx-acx)*.03; acy+=(aty-acy)*.03;
-          aurora.style.marginLeft = acx.toFixed(1)+'px';
-          aurora.style.marginTop  = acy.toFixed(1)+'px';
-          if(deep){ deep.style.marginLeft=(-acx*.5).toFixed(1)+'px'; deep.style.marginTop=(-acy*.5).toFixed(1)+'px'; }
+          aurora.style.transform = `translate(${acx.toFixed(1)}px,${acy.toFixed(1)}px)`;
+          if(deep){ deep.style.transform = `translate(${(-acx*.5).toFixed(1)}px,${(-acy*.5).toFixed(1)}px)`; }
         }
         requestAnimationFrame(tick);
       })();
