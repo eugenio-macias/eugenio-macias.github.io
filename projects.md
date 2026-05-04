@@ -88,9 +88,8 @@ title: Projects
     </div>
   </article>
 
-  <!-- ====== FEATURED ====== -->
-  <h3 class="section-title">Featured</h3>
-  <div class="projects-grid">
+  <!-- ====== 3-COL FEATURED GRID ====== -->
+  <div class="projects-grid top3-grid">
 
     <!-- DRP — PINN Optimizer Study -->
     <article class="project-card">
@@ -178,6 +177,12 @@ title: Projects
       </div>
     </a>
 
+  </div>
+
+  <!-- ====== MORE PROJECTS ====== -->
+  <h3 class="section-title">More Projects</h3>
+  <div class="projects-grid">
+
     <!-- PCA Investing -->
     <a class="project-card" href="ECON_1750_PCA (1).pdf" target="_blank" rel="noopener">
       <div class="pc-text">
@@ -215,12 +220,6 @@ title: Projects
         <div class="overlay">View PDF →</div>
       </div>
     </a>
-
-  </div>
-
-  <!-- ====== MORE PROJECTS ====== -->
-  <h3 class="section-title">More Projects</h3>
-  <div class="projects-grid">
 
     <!-- Go Hybrid Agent -->
     <article class="project-card">
@@ -395,6 +394,21 @@ title: Projects
       --grad1:#7c83ff; --grad2:#22d3ee; --grad3:#34d399;
       --shadow:0 24px 50px rgba(0,0,0,.5);
     }
+  }
+
+  .top3-grid{
+    grid-template-columns: repeat(3, 1fr) !important;
+    margin-bottom: 24px;
+  }
+  .top3-grid .project-card{
+    grid-template-columns: 1fr;
+  }
+  .top3-grid .project-card .pc-media{
+    order: -1;
+    min-height: 160px;
+  }
+  @media (max-width: 900px){
+    .top3-grid{ grid-template-columns: 1fr !important; }
   }
 
   .projects-page{ max-width:1100px; margin:0 auto; color:var(--ink); }

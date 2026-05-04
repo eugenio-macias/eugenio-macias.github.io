@@ -393,11 +393,8 @@
        SITE-WIDE FX v2
        ================================================================ */
 
-    /* 1 · Interactive particle canvas */
-    #bgCanvas{
-      position:fixed; inset:0; width:100%; height:100%;
-      z-index:-5; pointer-events:none; display:block;
-    }
+    /* 1 · particle canvas removed for performance */
+    #bgCanvas{ display:none; }
 
     /* 2 · Aurora nebula — no blur, transform-only animation = free on GPU */
     .aurora-global{
@@ -454,7 +451,7 @@
     /* 4 · Noise grid removed for performance */
     .noise-grid{ display:none !important; }
 
-    /* 4b · Shooting stars / meteor trails — 6 max for perf */
+    /* 4b · Shooting stars */
     .meteors-layer{ position:fixed; inset:0; z-index:-3; pointer-events:none; overflow:hidden; contain: strict; }
     .meteor-star{
       position:absolute;
@@ -475,21 +472,8 @@
     /* extra meteors hidden */
     .meteor-star:nth-child(n+7){ display:none; }
 
-    /* 4c · Scan beam — horizontal neon sweep */
-    .scan-beam{
-      position:fixed; left:0; right:0; top:0; height:2px;
-      background: linear-gradient(90deg, transparent 0%, rgba(34,211,238,.4) 20%, rgba(255,255,255,.75) 50%, rgba(34,211,238,.4) 80%, transparent 100%);
-      box-shadow: 0 0 12px rgba(34,211,238,.75), 0 0 40px rgba(34,211,238,.35), 0 0 6px rgba(255,255,255,.4);
-      pointer-events:none; z-index:198; opacity:0;
-      will-change:transform;
-      animation: scanBeam 9s linear infinite;
-    }
-    @keyframes scanBeam{
-      0%   { transform:translateY(-4px); opacity:0; }
-      4%   { opacity:.65; }
-      96%  { opacity:.35; }
-      100% { transform:translateY(100vh); opacity:0; }
-    }
+    /* scan-beam removed for performance */
+    .scan-beam{ display:none !important; }
     @keyframes meteorFly{
       0%  { transform: translateX(0)             rotate(-35deg); opacity:0;   }
       4%  { opacity:1; }
@@ -604,7 +588,7 @@
 
 <body>
   <!-- Site-wide Background FX -->
-  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+  <canvas id="bgCanvas" aria-hidden="true" style="display:none"></canvas>
   <div class="aurora-global" aria-hidden="true"></div>
   <div class="aurora-deep" aria-hidden="true"></div>
   <div class="orbs-layer" aria-hidden="true">
@@ -626,7 +610,7 @@
     <div class="meteor-star"></div>
     <div class="meteor-star"></div>
   </div>
-  <div class="scan-beam" aria-hidden="true"></div>
+  <div class="scan-beam" aria-hidden="true" style="display:none"></div>
   <div id="spotlightGlobal" class="spotlight-global" aria-hidden="true"></div>
 
   <!-- Progress bar -->
@@ -881,54 +865,7 @@
     const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const ACCENT  = ['#7c83ff','#22d3ee','#34d399','#a78bfa','#f472b6','#60a5fa'];
 
-    /* ── 1. INTERACTIVE PARTICLE NETWORK ──────────────────────────── */
-    !function () {
-      const canvas = document.getElementById('bgCanvas');
-      if (!canvas || REDUCE) return;
-      const ctx = canvas.getContext('2d');
-      let W, H;
-      function resize(){ W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
-      resize();
-      window.addEventListener('resize', resize, { passive:true });
-
-      let mX = W/2, mY = H/2;
-      window.addEventListener('mousemove', e=>{ mX=e.clientX; mY=e.clientY; }, {passive:true});
-
-      const N   = Math.min(Math.floor(W * H / 18000), 45);
-      const ATT = 160, FORCE = 0.010;
-      const pts = Array.from({length:N}, ()=>{
-        const a = Math.random()*Math.PI*2, spd = .15+Math.random()*.25;
-        return { x:Math.random()*W, y:Math.random()*H,
-                 vx:Math.cos(a)*spd, vy:Math.sin(a)*spd,
-                 r:1.0+Math.random()*1.5,
-                 c:ACCENT[Math.floor(Math.random()*ACCENT.length)],
-                 a:.2+Math.random()*.4 };
-      });
-
-      function frame(){
-        ctx.clearRect(0,0,W,H);
-        ctx.save(); ctx.globalCompositeOperation='lighter';
-        for(let i=0; i<pts.length; i++){
-          const p = pts[i];
-          // mouse attraction
-          const adx=mX-p.x, ady=mY-p.y, ad=adx*adx+ady*ady;
-          if(ad<ATT*ATT){ const f=(1-Math.sqrt(ad)/ATT)*FORCE; p.vx+=adx*f; p.vy+=ady*f; }
-          p.vx*=.985; p.vy*=.985;
-          const spd=p.vx*p.vx+p.vy*p.vy;
-          if(spd>2.56){ const s=1.6/Math.sqrt(spd); p.vx*=s; p.vy*=s; }
-          p.x+=p.vx; p.y+=p.vy;
-          if(p.x<0) p.x+=W; else if(p.x>W) p.x-=W;
-          if(p.y<0) p.y+=H; else if(p.y>H) p.y-=H;
-          ctx.globalAlpha=p.a;
-          ctx.fillStyle=p.c;
-          ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
-        }
-        ctx.restore();
-        if(!document.hidden) requestAnimationFrame(frame);
-      }
-      document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) requestAnimationFrame(frame); });
-      requestAnimationFrame(frame);
-    }();
+    /* ── 1. PARTICLE NETWORK REMOVED — too CPU-heavy ──────────────── */
 
     /* ── 2 + 2b. UNIFIED MOUSE EFFECTS LOOP (spotlight + aurora parallax) ── */
     !function(){
