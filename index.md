@@ -306,6 +306,23 @@ title: Home
     100%{ transform: translate(-50%, -50%) translate(calc(var(--dx) * 1.25), calc(var(--dy) * 1.25)) scale(.1); opacity:0; box-shadow: 0 0 0 transparent; }
   }
 
+  /* ===== Card text legibility ===== */
+  .card header {
+    color: #ffffff !important;
+    font-weight: 900;
+    font-size: 1.12rem;
+    text-shadow: 0 1px 0 rgba(0,0,0,.85), 0 0 10px rgba(255,255,255,.15);
+  }
+  .card li {
+    color: #ffffff !important;
+    opacity: 1 !important;
+  }
+  .card strong {
+    color: #38f0ff !important;
+    text-shadow: 0 0 10px rgba(34,211,238,.5) !important;
+  }
+  .card li em { color: #c4b5fd !important; }
+
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce){
     .aurora, .ring, .profile-pic, .glass, .card, .symbol, .spotlight, .particle { animation: none !important; transition: none !important; }

@@ -410,7 +410,7 @@
         radial-gradient(38% 32% at 68% 58%, rgba(245,158,11,.11), transparent 65%),
         radial-gradient(44% 40% at 22% 72%, rgba(244,114,182,.13), transparent 60%),
         radial-gradient(36% 32% at 78% 15%, rgba(167,139,250,.12), transparent 58%);
-      animation: auroraGlobalDrift 32s ease-in-out infinite alternate;
+      animation: auroraGlobalDrift 20s ease-in-out infinite alternate;
       will-change: transform;
     }
     @keyframes auroraGlobalDrift{
@@ -501,6 +501,27 @@
     .meteor-star:nth-child(3){ top:45%; left:-180px; --dur:11s; --delay:8.2s; }
     .meteor-star:nth-child(4){ top:68%; left:-180px; --dur:17s; --delay:2.1s; }
     .meteor-star:nth-child(5){ top:14%; left:-180px; --dur:21s; --delay:13s;  }
+    .meteor-star:nth-child(6){ top:32%; left:-180px; --dur:10s; --delay:7s;   width:200px; }
+    .meteor-star:nth-child(7){ top:58%; left:-180px; --dur:15s; --delay:2.8s; }
+    .meteor-star:nth-child(8){ top:80%; left:-180px; --dur:12s; --delay:11s;  width:220px; }
+    .meteor-star:nth-child(9){ top:5%;  left:-180px; --dur:18s; --delay:5.5s; }
+    .meteor-star:nth-child(10){ top:70%; left:-180px; --dur:8s;  --delay:16s;  width:240px; }
+
+    /* 4c · Scan beam — horizontal neon sweep */
+    .scan-beam{
+      position:fixed; left:0; right:0; top:0; height:2px;
+      background: linear-gradient(90deg, transparent 0%, rgba(34,211,238,.4) 20%, rgba(255,255,255,.75) 50%, rgba(34,211,238,.4) 80%, transparent 100%);
+      box-shadow: 0 0 12px rgba(34,211,238,.75), 0 0 40px rgba(34,211,238,.35), 0 0 6px rgba(255,255,255,.4);
+      pointer-events:none; z-index:198; opacity:0;
+      will-change:transform;
+      animation: scanBeam 9s linear infinite;
+    }
+    @keyframes scanBeam{
+      0%   { transform:translateY(-4px); opacity:0; }
+      4%   { opacity:.65; }
+      96%  { opacity:.35; }
+      100% { transform:translateY(100vh); opacity:0; }
+    }
     @keyframes meteorFly{
       0%  { transform: translateX(0)             rotate(-35deg); opacity:0;   }
       4%  { opacity:1; }
@@ -562,6 +583,33 @@
     }
     @keyframes gradientShift{ 0%{ background-position:0% 50%; } 100%{ background-position:300% 50%; } }
 
+    /* 9a · Card/article header element reset (stop global `header{}` rules leaking in) */
+    article header, .card header, .note-card header, .project-card header, .course-card header {
+      position:static !important; display:block !important; background:none !important;
+      backdrop-filter:none !important; border-bottom:none !important; box-shadow:none !important;
+      z-index:auto !important; padding:0 !important; grid-template-columns:none !important;
+      color:inherit !important; gap:0 !important; align-items:initial !important;
+    }
+
+    /* 9b · Card hover neon border pulse */
+    .project-card:hover, .note-card:hover {
+      animation: cardNeonPulse 2s ease-in-out infinite !important;
+    }
+    @keyframes cardNeonPulse {
+      0%,100%{ box-shadow: 0 0 0 1px rgba(124,131,255,.6), 0 0 28px rgba(124,131,255,.32), 0 30px 70px rgba(0,0,0,.6); border-color: rgba(124,131,255,.5) !important; }
+      50%    { box-shadow: 0 0 0 2px rgba(34,211,238,.7),  0 0 44px rgba(34,211,238,.42), 0 0 90px rgba(52,211,153,.22), 0 30px 70px rgba(0,0,0,.6); border-color: rgba(34,211,238,.6) !important; }
+    }
+
+    /* 9c · Chromatic aberration boost on gradient card titles (hover) */
+    .project-card:hover .pc-title {
+      filter: drop-shadow(-2px 0 0 rgba(244,114,182,.75)) drop-shadow(2px 0 0 rgba(124,131,255,.75)) drop-shadow(0 0 28px rgba(34,211,238,.7)) !important;
+      animation-duration: 1.8s !important;
+    }
+    .note-card:hover .note-text h3 {
+      filter: drop-shadow(-2px 0 0 rgba(244,114,182,.7)) drop-shadow(2px 0 0 rgba(124,131,255,.7)) drop-shadow(0 0 22px rgba(34,211,238,.65)) !important;
+      animation-duration: 1.8s !important;
+    }
+
     /* 9 · Click burst dot */
     .burst-dot{
       position:fixed; width:5px; height:5px; border-radius:50%;
@@ -570,9 +618,10 @@
 
     /* Reduced-motion: hide new fx */
     @media(prefers-reduced-motion:reduce){
-      .aurora-global,.aurora-deep,.orb,.noise-grid,#bgCanvas,.meteors-layer{ animation:none !important; display:none !important; }
+      .aurora-global,.aurora-deep,.orb,.noise-grid,#bgCanvas,.meteors-layer,.scan-beam{ animation:none !important; display:none !important; }
       .holo-shimmer{ display:none !important; }
       .glitch-title .gl1,.glitch-title .gl2{ display:none !important; }
+      .project-card:hover,.note-card:hover{ animation:none !important; }
       .section-title,.cheats-h2{
         animation:none !important;
         background:none !important;
@@ -603,7 +652,13 @@
     <div class="meteor-star"></div>
     <div class="meteor-star"></div>
     <div class="meteor-star"></div>
+    <div class="meteor-star"></div>
+    <div class="meteor-star"></div>
+    <div class="meteor-star"></div>
+    <div class="meteor-star"></div>
+    <div class="meteor-star"></div>
   </div>
+  <div class="scan-beam" aria-hidden="true"></div>
   <div id="spotlightGlobal" class="spotlight-global" aria-hidden="true"></div>
 
   <!-- Progress bar -->
@@ -883,8 +938,8 @@
       let mX = W/2, mY = H/2;
       window.addEventListener('mousemove', e=>{ mX=e.clientX; mY=e.clientY; }, {passive:true});
 
-      const N   = Math.min(Math.floor(W * H / 9500), 115);
-      const LNK = 140, ATT = 200, FORCE = 0.012;
+      const N   = Math.min(Math.floor(W * H / 7200), 140);
+      const LNK = 145, ATT = 200, FORCE = 0.012;
       const pts = Array.from({length:N}, ()=>{
         const a = Math.random()*Math.PI*2, spd = .2+Math.random()*.35;
         return { x:Math.random()*W, y:Math.random()*H,
@@ -1036,7 +1091,7 @@
             return i<((f/2)|0) ? ch : CHARS[Math.floor(Math.random()*CHARS.length)];
           }).join('');
           if(++f>=total){ el.textContent=orig; clearInterval(iv); }
-        }, 28);
+        }, 14);
       }
       const obs = new IntersectionObserver(entries=>{
         entries.forEach(e=>{ if(e.isIntersecting){ scramble(e.target); obs.unobserve(e.target); } });
@@ -1063,6 +1118,37 @@
             .finished.then(()=>dot.remove());
         }
       });
+    }();
+
+    /* ── 7. CURSOR NEON SNAKE TRAIL ──────────────────────────────────── */
+    !function(){
+      if(REDUCE || navigator.maxTouchPoints > 0) return;
+      const N = 14;
+      const xs = [], ys = [];
+      for(let i=0;i<N;i++){ xs.push(innerWidth/2); ys.push(innerHeight/2); }
+      const els = Array.from({length:N}, (_,i)=>{
+        const sz = Math.max(3, Math.round(11*(1-i/N)));
+        const d  = document.createElement('div');
+        d.style.cssText = `position:fixed;z-index:197;pointer-events:none;border-radius:50%;mix-blend-mode:screen;width:${sz}px;height:${sz}px;transform:translate(-50%,-50%);will-change:left,top;`;
+        document.body.appendChild(d); return d;
+      });
+      let mx = innerWidth/2, my = innerHeight/2;
+      window.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; }, {passive:true});
+      (function loop(){
+        xs[0]+=(mx-xs[0])*.32; ys[0]+=(my-ys[0])*.32;
+        for(let i=1;i<N;i++){ xs[i]+=(xs[i-1]-xs[i])*.28; ys[i]+=(ys[i-1]-ys[i])*.28; }
+        for(let i=0;i<N;i++){
+          const frac = 1 - i/N;
+          const c    = ACCENT[i % ACCENT.length];
+          const el   = els[i];
+          el.style.left    = xs[i].toFixed(1)+'px';
+          el.style.top     = ys[i].toFixed(1)+'px';
+          el.style.opacity = (frac * .68).toFixed(2);
+          el.style.background = c;
+          el.style.boxShadow  = `0 0 ${Math.round(frac*12)}px ${c},0 0 ${Math.round(frac*5)}px #fff5`;
+        }
+        requestAnimationFrame(loop);
+      })();
     }();
 
   })();
