@@ -127,7 +127,7 @@ title: Projects
         </div>
       </div>
       <div class="pc-media">
-        <img src="{{ site.baseurl }}/assets/images/thumbnails/Thesis_Presentation_thumbnail.png" alt="DRP Thumbnail">
+        <img src="{{ site.baseurl }}/assets/images/thumbnails/DRP_thumbnail2.png" alt="DRP Thumbnail">
         <div class="overlay">View →</div>
       </div>
     </article>
