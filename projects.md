@@ -155,7 +155,7 @@ title: Projects
         </div>
         <div class="pc-links">
           <a class="pc-link" href="https://github.com/harshitaggarwal01/TransferRL" target="_blank" rel="noopener"><i class="fab fa-github"></i> TransferRL</a>
-          <a class="pc-link" href="{{ '/Reintegrating_AI_Course__Curiosity_Driven_Transfer_Learning___Final_Paper.pdf' | relative_url }}" target="_blank" rel="noopener"><i class="fas fa-file-pdf"></i> Paper</a>
+          <a class="pc-link" href="{{ '/Reintegrating_AI_Course__Curiosity_Driven_Transfer_Learning___Final_Paper (13).pdf' | relative_url }}" target="_blank" rel="noopener"><i class="fas fa-file-pdf"></i> Paper</a>
         </div>
       </div>
       <div class="pc-media">
