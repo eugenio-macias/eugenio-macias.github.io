@@ -121,7 +121,7 @@ title: Home
     --mouse-x: 50%; --mouse-y: 50%;
   }
   html{ scroll-behavior:smooth; }
-  body { background: var(--bg); color: var(--ink); overflow-x:hidden; }
+  body { background: transparent; color: var(--ink); overflow-x:hidden; }
 
   /* Stars, Aurora, Spotlight */
   #stars{ position:fixed; inset:0; width:100%; height:100%; z-index:-3; display:block; }
