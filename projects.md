@@ -7,8 +7,12 @@ title: Projects
 
   <!-- ====== HERO / TITLE ====== -->
   <header class="projects-hero">
-    <h1>Projects</h1>
-    <p>Selected work across quantitative research, ML, optimization, and systems.</p>
+    <h1 class="projects-hero-title">
+      <span class="pht-main">Projects</span>
+      <span class="pht-gl1" aria-hidden="true">Projects</span>
+      <span class="pht-gl2" aria-hidden="true">Projects</span>
+    </h1>
+    <p class="projects-hero-sub">Selected work across <em>quantitative research</em>, <em>ML</em>, <em>optimization</em>, and <em>systems</em>.</p>
   </header>
 
   <!-- ====== HONORS THESIS (HERO CARD) ====== -->
@@ -88,8 +92,8 @@ title: Projects
     </div>
   </article>
 
-  <!-- ====== 3-COL FEATURED GRID ====== -->
-  <div class="projects-grid top3-grid">
+  <!-- ====== 5-COL FEATURED GRID ====== -->
+  <div class="projects-grid top5-grid">
 
     <!-- DRP — PINN Optimizer Study -->
     <article class="project-card">
@@ -182,44 +186,6 @@ title: Projects
   <!-- ====== MORE PROJECTS ====== -->
   <h3 class="section-title">More Projects</h3>
   <div class="projects-grid">
-
-    <!-- PCA Investing -->
-    <a class="project-card" href="ECON_1750_PCA (1).pdf" target="_blank" rel="noopener">
-      <div class="pc-text">
-        <h3 class="pc-title">PCA Investing: Eigen-Portfolios for Market-Neutral Strategies</h3>
-        <p class="pc-desc">
-          PCA on returns → risk-normalized eigen-portfolios; OOS evaluation (Sharpe/IR), cumulative-return visualizations,
-          dynamic allocation to limit look-ahead bias.
-        </p>
-        <div class="badges">
-          <span class="badge">Quant</span><span class="badge">PCA</span><span class="badge">Portfolio</span>
-        </div>
-        <span class="pc-cta">View PDF →</span>
-      </div>
-      <div class="pc-media">
-        <img src="{{ site.baseurl }}/assets/images/thumbnails/PCA_thumbnail.jpg" alt="PCA Investing Thumbnail">
-        <div class="overlay">View PDF →</div>
-      </div>
-    </a>
-
-    <!-- Fourier / Laplace Research -->
-    <a class="project-card" href="assets/files/Extended_Essay.pdf" target="_blank" rel="noopener">
-      <div class="pc-text">
-        <h3 class="pc-title">Research: Fourier Analysis & Laplace’s Equation</h3>
-        <p class="pc-desc">
-          50-page analysis of Fourier methods for 2-D Laplace with Dirichlet boundaries; convergence criteria and
-          solution space characterization.
-        </p>
-        <div class="badges">
-          <span class="badge">Fourier</span><span class="badge">PDE</span><span class="badge">Analysis</span>
-        </div>
-        <span class="pc-cta">View PDF →</span>
-      </div>
-      <div class="pc-media">
-        <img src="{{ site.baseurl }}/assets/images/thumbnails/EE_thumbnail.jpg" alt="Fourier Analysis Thumbnail">
-        <div class="overlay">View PDF →</div>
-      </div>
-    </a>
 
     <!-- Go Hybrid Agent -->
     <article class="project-card">
@@ -396,25 +362,78 @@ title: Projects
     }
   }
 
-  .top3-grid{
-    grid-template-columns: repeat(3, 1fr) !important;
+  .top5-grid{
+    grid-template-columns: repeat(5, 1fr) !important;
     margin-bottom: 24px;
   }
-  .top3-grid .project-card{
+  .top5-grid .project-card{
     grid-template-columns: 1fr;
   }
-  .top3-grid .project-card .pc-media{
+  .top5-grid .project-card .pc-media{
     order: -1;
-    min-height: 160px;
+    min-height: 140px;
   }
-  @media (max-width: 900px){
-    .top3-grid{ grid-template-columns: 1fr !important; }
+  @media (max-width: 1100px){
+    .top5-grid{ grid-template-columns: repeat(3, 1fr) !important; }
+  }
+  @media (max-width: 700px){
+    .top5-grid{ grid-template-columns: 1fr !important; }
   }
 
-  .projects-page{ max-width:1100px; margin:0 auto; color:var(--ink); }
-  .projects-hero{ text-align:center; margin:10px 0 18px; }
-  .projects-hero h1{ margin:0; font-size:clamp(1.8rem,2.6vw,2.3rem); }
-  .projects-hero p{ margin:.25rem 0 0; color:var(--muted); }
+  .projects-page{ max-width:1600px; margin:0 auto; padding:0 clamp(12px,2vw,32px); color:var(--ink); }
+  .projects-hero{ text-align:center; margin:10px 0 24px; }
+
+  /* Animated gradient title */
+  .projects-hero-title{
+    position:relative; display:inline-block;
+    margin:0 0 .5rem; font-size:clamp(2.4rem,5vw,4rem);
+    font-weight:900; letter-spacing:-.5px; line-height:1;
+    background: linear-gradient(90deg, var(--grad1), var(--grad2), var(--grad3), var(--grad1));
+    background-size: 300% 100%;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    animation: gradientShift 5s linear infinite;
+    filter: drop-shadow(0 0 22px rgba(124,131,255,.45));
+  }
+  /* Glitch layers */
+  .pht-gl1, .pht-gl2{
+    position:absolute; inset:0; pointer-events:none;
+    background: inherit; -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    opacity:0;
+  }
+  .pht-gl1{ animation: phGlitchA  8s 0s   infinite linear; }
+  .pht-gl2{ animation: phGlitchB 11s 1.8s infinite linear; }
+  @keyframes phGlitchA{
+    0%,87%,100%{ clip-path:none; transform:none; opacity:0; }
+    89%{ clip-path:polygon(0 20%,100% 20%,100% 38%,0 38%); transform:translate(-4px,0); opacity:.8; }
+    91%{ clip-path:polygon(0 55%,100% 55%,100% 70%,0 70%); transform:translate( 4px,0); opacity:.7; }
+    93%{ clip-path:polygon(0 38%,100% 38%,100% 56%,0 56%); transform:translate(-2px,0); opacity:.6; }
+    95%{ clip-path:none; transform:none; opacity:0; }
+  }
+  @keyframes phGlitchB{
+    0%,81%,100%{ clip-path:none; transform:none; opacity:0; }
+    83%{ clip-path:polygon(0 45%,100% 45%,100% 62%,0 62%); transform:translate( 3px,0); opacity:.7; }
+    85%{ clip-path:polygon(0 10%,100% 10%,100% 28%,0 28%); transform:translate(-3px,0); opacity:.65; }
+    87%{ clip-path:none; transform:none; opacity:0; }
+  }
+
+  /* Subtitle with animated word highlights */
+  .projects-hero-sub{
+    margin:.3rem 0 0; font-size:clamp(.95rem,1.4vw,1.1rem);
+    color: var(--muted); letter-spacing:.01em;
+  }
+  .projects-hero-sub em{
+    font-style:normal; font-weight:700;
+    background: linear-gradient(90deg, var(--grad1), var(--grad2), var(--grad3), var(--grad1));
+    background-size: 300% 100%;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    animation: gradientShift 5s linear infinite;
+  }
+  .projects-hero-sub em:nth-child(2){ animation-delay:-.8s; }
+  .projects-hero-sub em:nth-child(3){ animation-delay:-1.6s; }
+  .projects-hero-sub em:nth-child(4){ animation-delay:-2.4s; }
 
   .section-title{
     margin:20px 0 10px; font-size:1.1rem; letter-spacing:.2px;
