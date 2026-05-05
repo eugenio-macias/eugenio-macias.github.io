@@ -405,10 +405,15 @@ title: Projects
     margin-bottom: 24px;
   }
   .top5-grid .project-card{
-    grid-template-columns: 1fr;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .top5-grid .project-card .pc-text{
+    flex: 1;
   }
   .top5-grid .project-card .pc-media{
     order: -1;
+    flex-shrink: 0;
     height: 100px;
     min-height: 0;
     max-height: 100px;

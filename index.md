@@ -47,20 +47,31 @@ title: Home
         <h2>About me</h2>
         <div class="text-bg">
           <p>
-            I'm an international student from Mexico at Brown University, graduating May 2026 with a
+            I'm from <strong>Mexico</strong>, graduating May 2026 from Brown University with a
             <strong>BS in Applied Mathematics–Computer Science (Honors)</strong> and a <strong>BA in Mathematics</strong>.
-            I focus on learning dynamical laws from imperfect data: <strong>probability-theory-grounded machine learning for PDEs</strong>,
-            <strong>Reinforcement Learning</strong>, <strong>Physics-Informed Deep Learning</strong>,
-            <strong>Stochastic Processes</strong>, and <strong>Uncertainty Quantification (UQ)</strong>.
-            My honors thesis (Advisor: Prof. Björn Sandstede) develops
-            <strong>shift-aligned reduced-order models</strong> (POD + MVAR/LSTM latent time-steppers) and
-            <strong>WSINDy weak-form PDE discovery</strong> for emergent collective agent dynamics in noisy Vicsek–Morse trajectories,
-            targeting identifiability and scalable sparse regression.
-            I also researched self-scaled quasi-Newton optimizers (SSBroyden) for PINNs in the Karniadakis Lab, and
-            curiosity-driven transfer learning (ICM, RND, PPO) with Prof. George Konidaris.
-            Outside of math, I love <strong>♟ chess</strong> (2070 ELO), <strong>🎸 classical guitar</strong>,
-            <strong>🏃 running</strong> (5 marathons), and <strong>✈️ traveling</strong>—
-            I've visited <strong>45 countries</strong>, starting from my IB at <strong>UWC Mostar in Bosnia and Herzegovina</strong>.
+            After Brown I'm heading to <strong>New York City</strong> — excited to join its quant finance,
+            ML research, and startup ecosystems. My work focuses on learning dynamical laws from imperfect data:
+            <strong>probability-theory-grounded ML for PDEs</strong>, <strong>Reinforcement Learning</strong>,
+            <strong>Physics-Informed Deep Learning</strong>, and <strong>Uncertainty Quantification</strong>.
+            My honors thesis (Advisor: Prof. Björn Sandstede) builds
+            <strong>shift-aligned reduced-order models</strong> (POD + MVAR/LSTM) and
+            <strong>WSINDy weak-form PDE discovery</strong> for collective agent dynamics.
+            I also researched self-scaled quasi-Newton optimizers for PINNs (Karniadakis Lab)
+            and curiosity-driven transfer learning with Prof. George Konidaris.
+          </p>
+          <p style="margin:.6rem 0 0;">
+            Beyond the math, I'm a devoted traveller — <strong>45 countries</strong> across Europe,
+            Asia, Latin America, the Middle East, and Africa, with many more ahead.
+            My IB at <strong>UWC Mostar</strong> (Bosnia &amp; Herzegovina) sparked a lifelong love
+            for cultural immersion. I speak <strong>Spanish</strong> (native), <strong>English</strong>
+            (fluent), conversational <strong>French</strong>, and a few words of Bosnian.
+            Wherever I land, I head straight for the food markets:
+            mole negro in Oaxaca, ćevapi in Sarajevo, dumplings in Chengdu, tagine in Marrakech.
+          </p>
+          <p style="margin:.6rem 0 0;">
+            I play <strong>classical guitar &amp; flamenco</strong> — the interplay of rhythm,
+            tension, and mathematical structure is endlessly fascinating. I'm also a competitive
+            <strong>♟ chess</strong> player (2070 ELO) and have run <strong>5 marathons</strong>.
           </p>
         </div>
       </article>
@@ -187,7 +198,7 @@ title: Home
 
   /* ===== Hero name glitch title ===== */
   .hero-name{
-    position:relative; display:inline-block;
+    position:relative; display:block;
     font-size:clamp(2rem,4vw,3rem);
     font-weight:900; letter-spacing:-.5px; line-height:1.1;
     margin:0 0 .55rem;
@@ -571,5 +582,28 @@ title: Home
     document.documentElement.style.setProperty('--mouse-x', e.clientX + 'px');
     document.documentElement.style.setProperty('--mouse-y', e.clientY + 'px');
   }, {passive:true});
+})();
+
+/* ===== Hero name scramble ===== */
+(function(){
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce) return;
+  const el = document.querySelector('.hn-main');
+  if(!el) return;
+  const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ∑∫∂∇αβγδεζθλμπσφψω#$%01289';
+  function scramble(){
+    const orig = el.dataset.orig || el.textContent;
+    el.dataset.orig = orig;
+    let f = 0; const total = orig.length * 2;
+    const iv = setInterval(()=>{
+      el.textContent = orig.split('').map((ch, i)=>{
+        if(ch === ' ') return ch;
+        return i < ((f/2)|0) ? ch : CHARS[Math.floor(Math.random()*CHARS.length)];
+      }).join('');
+      if(++f >= total){ el.textContent = orig; clearInterval(iv); }
+    }, 14);
+  }
+  setTimeout(scramble, 500);
+  setInterval(scramble, 10000);
 })();
 </script>
