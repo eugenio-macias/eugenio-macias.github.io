@@ -409,7 +409,9 @@ title: Projects
   }
   .top5-grid .project-card .pc-media{
     order: -1;
-    min-height: 140px;
+    height: 100px;
+    min-height: 0;
+    max-height: 100px;
   }
   @media (max-width: 1100px){
     .top5-grid{ grid-template-columns: repeat(3, 1fr) !important; }

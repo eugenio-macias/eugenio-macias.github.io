@@ -10,6 +10,8 @@ title: Home
 
 <!-- ===== HERO ===== -->
 <section class="hero">
+  <div class="hero-orb hero-orb1" aria-hidden="true"></div>
+  <div class="hero-orb hero-orb2" aria-hidden="true"></div>
   <div class="hero-inner">
 
     <!-- Profile -->
@@ -27,6 +29,11 @@ title: Home
 
     <!-- Intro -->
     <div class="intro">
+      <div class="hero-name" aria-label="Eugenio Macías Orozco">
+        <span class="hn-main">Eugenio Macías Orozco</span>
+        <span class="hn-gl1" aria-hidden="true">Eugenio Macías Orozco</span>
+        <span class="hn-gl2" aria-hidden="true">Eugenio Macías Orozco</span>
+      </div>
       <h1 class="title">
         <span class="badge">BS Applied Mathematics–Computer Science (Honors) & BA Mathematics</span>
       </h1>
@@ -177,6 +184,52 @@ title: Home
   .title{ margin:0 0 .35rem; font-size:clamp(1.6rem,3.2vw,2.2rem); line-height:1.08; color:var(--ink); }
   .title::after{ content:""; display:block; height:2px; width:86px; margin-top:.4rem; background:linear-gradient(90deg,var(--g1),var(--g2),var(--g3)); border-radius:2px; }
   .badge{ display:inline-block; font-size:.92rem; font-weight:700; padding:6px 12px; border-radius:999px; color:#0b1220; background:linear-gradient(90deg,var(--g2),var(--g3)); }
+
+  /* ===== Hero name glitch title ===== */
+  .hero-name{
+    position:relative; display:inline-block;
+    font-size:clamp(2rem,4vw,3rem);
+    font-weight:900; letter-spacing:-.5px; line-height:1.1;
+    margin:0 0 .55rem;
+    background: linear-gradient(90deg, var(--g1), var(--g2), var(--g3), var(--g1));
+    background-size: 300% 100%;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    animation: gradientShift 5s linear infinite;
+    filter: drop-shadow(0 0 22px rgba(124,131,255,.45));
+  }
+  .hn-gl1, .hn-gl2{
+    position:absolute; inset:0; pointer-events:none;
+    background: inherit; -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    opacity:0;
+  }
+  .hn-gl1{ animation: glitchA  9s 0s  infinite linear; }
+  .hn-gl2{ animation: glitchB 11s 2s  infinite linear; }
+
+  /* ===== Floating light orbs in hero ===== */
+  .hero-orb{ position:absolute; border-radius:50%; pointer-events:none; mix-blend-mode:screen; z-index:0; overflow:hidden; }
+  .hero-orb1{
+    width:440px; height:440px;
+    background: radial-gradient(circle at 40% 40%, rgba(124,131,255,.22), transparent 68%);
+    top:-100px; right:4%;
+    animation: orbFloat1 11s ease-in-out infinite alternate;
+  }
+  .hero-orb2{
+    width:320px; height:320px;
+    background: radial-gradient(circle at 60% 60%, rgba(34,211,238,.18), transparent 68%);
+    bottom:30px; left:1%;
+    animation: orbFloat2 15s ease-in-out infinite alternate;
+  }
+  @keyframes orbFloat1{
+    from{ transform:translate(0,0) scale(1); }
+    to  { transform:translate(18px,-28px) scale(1.12); }
+  }
+  @keyframes orbFloat2{
+    from{ transform:translate(0,0) scale(1); }
+    to  { transform:translate(-14px,20px) scale(1.1); }
+  }
+
   .typing{ margin:.4rem 0 1.0rem; color:var(--ink); opacity:.95; font-size:clamp(1rem,1.6vw,1.1rem); min-height:1.4em; }
   .typing span{ display:inline-block; white-space:nowrap; overflow:hidden; border-right:2px solid currentColor; animation: typing 3s steps(42,end) infinite alternate, caret 700ms steps(1) infinite; }
   @keyframes typing { from { width: 0; } to { width: 42ch; } }
@@ -325,7 +378,8 @@ title: Home
 
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce){
-    .aurora, .ring, .profile-pic, .glass, .card, .symbol, .spotlight, .particle { animation: none !important; transition: none !important; }
+    .aurora, .ring, .profile-pic, .glass, .card, .symbol, .spotlight, .particle,
+    .hero-orb, .hero-name { animation: none !important; transition: none !important; }
     .typing span{ animation: none; border-right: none; }
   }
 </style>
