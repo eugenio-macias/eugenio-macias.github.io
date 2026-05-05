@@ -181,6 +181,44 @@ title: Projects
       </div>
     </a>
 
+    <!-- PCA Investing -->
+    <a class="project-card" href="{{ '/ECON_1750_PCA (1).pdf' | relative_url }}" target="_blank" rel="noopener">
+      <div class="pc-text">
+        <h3 class="pc-title">PCA Investing: Eigen-Portfolios for Market-Neutral Strategies</h3>
+        <p class="pc-desc">
+          PCA on returns → risk-normalized eigen-portfolios; OOS evaluation (Sharpe/IR), cumulative-return
+          visualizations, dynamic allocation to limit look-ahead bias.
+        </p>
+        <div class="badges">
+          <span class="badge">Quant</span><span class="badge">PCA</span><span class="badge">Portfolio</span>
+        </div>
+        <span class="pc-cta">View PDF →</span>
+      </div>
+      <div class="pc-media">
+        <img src="{{ site.baseurl }}/assets/images/thumbnails/PCA_thumbnail.jpg" alt="PCA Investing Thumbnail">
+        <div class="overlay">View PDF →</div>
+      </div>
+    </a>
+
+    <!-- Fourier / Laplace Research -->
+    <a class="project-card" href="{{ '/assets/files/Extended_Essay.pdf' | relative_url }}" target="_blank" rel="noopener">
+      <div class="pc-text">
+        <h3 class="pc-title">Research: Fourier Analysis &amp; Laplace's Equation</h3>
+        <p class="pc-desc">
+          50-page analysis of Fourier methods for 2-D Laplace with Dirichlet boundaries; convergence
+          criteria and solution space characterization.
+        </p>
+        <div class="badges">
+          <span class="badge">Fourier</span><span class="badge">PDE</span><span class="badge">Analysis</span>
+        </div>
+        <span class="pc-cta">View PDF →</span>
+      </div>
+      <div class="pc-media">
+        <img src="{{ site.baseurl }}/assets/images/thumbnails/EE_thumbnail.jpg" alt="Fourier Analysis Thumbnail">
+        <div class="overlay">View PDF →</div>
+      </div>
+    </a>
+
   </div>
 
   <!-- ====== MORE PROJECTS ====== -->
