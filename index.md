@@ -49,8 +49,12 @@ title: Home
           <p>
             I'm from <strong>Mexico</strong>, graduating May 2026 from Brown University with a
             <strong>BS in Applied Mathematics–Computer Science (Honors)</strong> and a <strong>BA in Mathematics</strong>.
-            After Brown I'm heading to <strong>New York City</strong> — excited to join its quant finance,
-            ML research, and startup ecosystems. My work focuses on learning dynamical laws from imperfect data:
+            My deep life goal is to <strong>contribute to the use of AI for the advancement of mathematics</strong> —
+            accelerating discovery, automating proof exploration, and forging new connections across fields.
+            After Brown I'm heading to <strong>New York City</strong> for the quant finance, ML research, and
+            startup ecosystems there. I also plan a <strong>year in Hong Kong</strong> to immerse myself in its
+            rapidly evolving <strong>AI and financial landscape</strong> and its role as a gateway between East and West.
+            My research focuses on learning dynamical laws from imperfect data:
             <strong>probability-theory-grounded ML for PDEs</strong>, <strong>Reinforcement Learning</strong>,
             <strong>Physics-Informed Deep Learning</strong>, and <strong>Uncertainty Quantification</strong>.
             My honors thesis (Advisor: Prof. Björn Sandstede) builds
@@ -63,10 +67,13 @@ title: Home
             Beyond the math, I'm a devoted traveller — <strong>45 countries</strong> across Europe,
             Asia, Latin America, the Middle East, and Africa, with many more ahead.
             My IB at <strong>UWC Mostar</strong> (Bosnia &amp; Herzegovina) sparked a lifelong love
-            for cultural immersion. I speak <strong>Spanish</strong> (native), <strong>English</strong>
-            (fluent), conversational <strong>French</strong>, and a few words of Bosnian.
-            Wherever I land, I head straight for the food markets:
-            mole negro in Oaxaca, ćevapi in Sarajevo, dumplings in Chengdu, tagine in Marrakech.
+            for cultural immersion. I speak <strong>Spanish</strong> (native) and <strong>English</strong>
+            (bilingual), with <strong>B1 German</strong> and conversational <strong>French</strong>.
+            One of my obsessions is seeking out the best local food everywhere I go:
+            <strong>otoro sashimi</strong> in Japan, <strong>xiaolongbao</strong> in Shanghai,
+            <strong>ceviche</strong> in Lima, <strong>Adana kebab</strong> in Turkey,
+            <strong>seafood</strong> from Almería, and <strong>sisig</strong> in El Nido —
+            each plate a window into a place and its people.
           </p>
           <p style="margin:.6rem 0 0;">
             I play <strong>classical guitar &amp; flamenco</strong> — the interplay of rhythm,
