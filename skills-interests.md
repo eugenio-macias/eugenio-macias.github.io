@@ -110,7 +110,7 @@ title: Skills
     <h2>Interests</h2>
     <ul class="interest-list">
       <li>Classical guitar — 3rd national, Mexico. I study with <a href="https://en.wikipedia.org/wiki/Mark_Delpriora" target="_blank" rel="noopener">Mark Delpriora</a>.</li>
-      <li>Bullet chess — 2100 Elo. Profile: <a href="https://www.chess.com/member/GM_Yuyo" target="_blank" rel="noopener">chess.com/member/GM_Yuyo</a>.</li>
+      <li>Bullet chess — 2100 Elo. Profile: <a class="with-icon" href="https://www.chess.com/member/GM_Yuyo" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M7 21h10v-2H7v2zm5-19 1.5 3h3l-2.4 2.1.9 3.4L12 9.2 8 10.5l.9-3.4L6.5 5h3L12 2zM8 12h8l-1 7H9l-1-7z"/></svg>chess.com/member/GM_Yuyo</a>.</li>
       <li>Running — 5 marathons.</li>
       <li>Automatic music transcription.</li>
       <li>Travel.</li>

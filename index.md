@@ -24,13 +24,13 @@ title: Home
         In summer 2025 I interned at Citi on equity derivatives in New York. I now work there as a quantitative trading analyst on FX systematic trading. I TA Operations Research: Probabilistic Models and have TA’d Calculus II.
       </p>
       <p>
-        I play classical guitar. I play bullet chess. I have run five marathons. Spanish and English are native; German and French are B1.
+        I play classical guitar. I play <a class="with-icon" href="https://www.chess.com/member/GM_Yuyo" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M7 21h10v-2H7v2zm5-19 1.5 3h3l-2.4 2.1.9 3.4L12 9.2 8 10.5l.9-3.4L6.5 5h3L12 2zM8 12h8l-1 7H9l-1-7z"/></svg>bullet chess</a>. I have run five marathons. Spanish and English are native; German and French are B1.
       </p>
     </div>
 
     <div class="resume-row">
-      <a href="{{ '/assets/files/Resume_Quant.pdf' | relative_url }}" target="_blank" rel="noopener">Quant resume (PDF)</a>
-      <a href="{{ '/assets/files/Resume_Scientific_ML.pdf' | relative_url }}" target="_blank" rel="noopener">Scientific ML resume (PDF)</a>
+      <a class="with-icon" href="{{ '/assets/files/Resume_Quant.pdf' | relative_url }}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M6 2h8l6 6v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm7 1.5V9h5.5L13 3.5zM8 13h8v1.5H8V13zm0 3h6v1.5H8V16z"/></svg>Quant resume (PDF)</a>
+      <a class="with-icon" href="{{ '/assets/files/Resume_Scientific_ML.pdf' | relative_url }}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M6 2h8l6 6v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm7 1.5V9h5.5L13 3.5zM8 13h8v1.5H8V13zm0 3h6v1.5H8V16z"/></svg>Scientific ML resume (PDF)</a>
     </div>
   </div>
 </section>

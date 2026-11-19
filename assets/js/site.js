@@ -41,6 +41,41 @@
     if (path === here) a.setAttribute("aria-current", "page");
   });
 
+  var veil = document.getElementById("dimVeil");
+  if (veil && !reduce) {
+    var gx = window.innerWidth * 0.5;
+    var gy = 160;
+    var dimQueued = false;
+    window.addEventListener("pointermove", function (e) {
+      gx = e.clientX;
+      gy = e.clientY;
+      if (dimQueued) return;
+      dimQueued = true;
+      requestAnimationFrame(function () {
+        dimQueued = false;
+        veil.style.setProperty("--gx", gx.toFixed(0) + "px");
+        veil.style.setProperty("--gy", gy.toFixed(0) + "px");
+      });
+    }, { passive: true });
+  }
+
+  function bindTilt(selector, maxDeg) {
+    if (reduce) return;
+    document.querySelectorAll(selector).forEach(function (card) {
+      card.addEventListener("mousemove", function (e) {
+        var r = card.getBoundingClientRect();
+        var dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+        var dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+        card.style.transform = "translateY(-6px) scale(1.03) perspective(900px) rotateX(" + (-dy * maxDeg).toFixed(2) + "deg) rotateY(" + (dx * maxDeg).toFixed(2) + "deg)";
+      });
+      card.addEventListener("pointerleave", function () {
+        card.style.transform = "";
+      });
+    });
+  }
+  bindTilt(".project-card", 7);
+  bindTilt(".note-card", 8);
+
   if (!canvas || !canvas.getContext) return;
 
   var STRINGS = 6;
