@@ -389,14 +389,4 @@ title: Classes I Have Taken
   .bar { --v: 50%; position: relative; height: 8px; background: #ececec; border-radius: 999px; overflow: hidden; }
   .bar::after { content: ""; position: absolute; inset: 0; width: var(--v); background: linear-gradient(90deg, #3b82f6, #22c55e); }
 
-  /* Dark mode */
-  @media (prefers-color-scheme: dark) {
-    :root { --bg:#0b0b0b; --bg2:#111; --bd:#222; --t2:#aaa; }
-    .panel, details, .course-card { background: var(--bg); border-color: var(--bd); }
-    .count { background: #1f2937; color: #e5e7eb; }
-    .tag { background: #0f172a; color: #e2e8f0; }
-    .tag-muted { background: #111827; color: #9ca3af; border-color: #1f2937; }
-    .tag-live { background: #0b3b25; color: #86efac; border-color: #14532d; }
-    .bar { background: #1f2937; }
-  }
 </style>
