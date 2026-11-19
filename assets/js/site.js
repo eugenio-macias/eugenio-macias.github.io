@@ -41,40 +41,53 @@
     if (path === here) a.setAttribute("aria-current", "page");
   });
 
-  var veil = document.getElementById("dimVeil");
-  if (veil && !reduce) {
-    var gx = window.innerWidth * 0.5;
-    var gy = 160;
-    var dimQueued = false;
-    window.addEventListener("pointermove", function (e) {
-      gx = e.clientX;
-      gy = e.clientY;
-      if (dimQueued) return;
-      dimQueued = true;
-      requestAnimationFrame(function () {
-        dimQueued = false;
-        veil.style.setProperty("--gx", gx.toFixed(0) + "px");
-        veil.style.setProperty("--gy", gy.toFixed(0) + "px");
-      });
-    }, { passive: true });
-  }
+  if (!reduce) {
+    var tiltCard = null;
+    var tiltX = 0;
+    var tiltY = 0;
+    var tiltQueued = false;
 
-  function bindTilt(selector, maxDeg) {
-    if (reduce) return;
-    document.querySelectorAll(selector).forEach(function (card) {
-      card.addEventListener("mousemove", function (e) {
-        var r = card.getBoundingClientRect();
-        var dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
-        var dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
-        card.style.transform = "translateY(-6px) scale(1.03) perspective(900px) rotateX(" + (-dy * maxDeg).toFixed(2) + "deg) rotateY(" + (dx * maxDeg).toFixed(2) + "deg)";
-      });
-      card.addEventListener("pointerleave", function () {
-        card.style.transform = "";
-      });
+    function paintTilt() {
+      tiltQueued = false;
+      if (!tiltCard) return;
+      var rect = tiltCard.getBoundingClientRect();
+      if (rect.width < 1 || rect.height < 1) return;
+      var nx = (tiltX - rect.left) / rect.width - 0.5;
+      var ny = (tiltY - rect.top) / rect.height - 0.5;
+      var ry = nx * 6;
+      var rx = -ny * 5;
+      if (ry > 3.5) ry = 3.5;
+      if (ry < -3.5) ry = -3.5;
+      if (rx > 3) rx = 3;
+      if (rx < -3) rx = -3;
+      tiltCard.style.transform = "perspective(900px) translateY(-4px) rotateX(" + rx.toFixed(2) + "deg) rotateY(" + ry.toFixed(2) + "deg)";
+    }
+
+    document.addEventListener("pointermove", function (e) {
+      var card = e.target && e.target.closest ? e.target.closest(".project-card") : null;
+      if (tiltCard && tiltCard !== card) {
+        tiltCard.style.transform = "";
+        tiltCard = null;
+      }
+      if (!card) return;
+      tiltCard = card;
+      tiltX = e.clientX;
+      tiltY = e.clientY;
+      if (tiltQueued) return;
+      tiltQueued = true;
+      requestAnimationFrame(paintTilt);
+    }, { passive: true });
+
+    document.addEventListener("pointerout", function (e) {
+      if (!tiltCard) return;
+      var next = e.relatedTarget;
+      if (next && tiltCard.contains(next)) return;
+      var from = e.target && e.target.closest ? e.target.closest(".project-card") : null;
+      if (from !== tiltCard) return;
+      tiltCard.style.transform = "";
+      tiltCard = null;
     });
   }
-  bindTilt(".project-card", 7);
-  bindTilt(".note-card", 8);
 
   if (!canvas || !canvas.getContext) return;
 

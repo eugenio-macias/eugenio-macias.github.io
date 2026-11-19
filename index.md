@@ -24,7 +24,7 @@ title: Home
         In summer 2025 I interned at Citi on equity derivatives in New York. I now work there as a quantitative trading analyst on FX systematic trading. I TA Operations Research: Probabilistic Models and have TA’d Calculus II.
       </p>
       <p>
-        I play classical guitar. I play <a class="with-icon" href="https://www.chess.com/member/GM_Yuyo" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M7 21h10v-2H7v2zm5-19 1.5 3h3l-2.4 2.1.9 3.4L12 9.2 8 10.5l.9-3.4L6.5 5h3L12 2zM8 12h8l-1 7H9l-1-7z"/></svg>bullet chess</a>. I have run five marathons. Spanish and English are native; German and French are B1.
+        I play classical guitar. <a class="with-icon" href="https://www.chess.com/member/GM_Yuyo" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M11 1h2v2h2.5v2H13v1.4c2.6.5 4.4 2 4.4 4 0 1.1-.4 2-1.1 2.7 1.3.7 2.2 1.8 2.2 3.2V18h1.2v2.2H4.3V18H5.5v-1.7c0-1.4.9-2.5 2.2-3.2C7 10.4 6.6 9.5 6.6 8.4c0-2 1.8-3.5 4.4-4V5H8.5V3H11V1z"/></svg>I play bullet chess.</a>. I have run five marathons. Spanish and English are native; German and French are B1.
       </p>
     </div>
 

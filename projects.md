@@ -46,7 +46,7 @@ title: Projects
       </div>
     </div>
     <a class="thumb-link pc-media" href="{{ '/assets/files/Kalshi_Weather.pdf' | relative_url }}" target="_blank" rel="noopener">
-      <img src="{{ '/assets/images/thumbnails/kalshi_weather_thumbnail.png' | relative_url }}" alt="Temperature-ladder sketch for the Kalshi weather project">
+      <img src="{{ '/assets/images/thumbnails/kalshi_weather_thumbnail.png' | relative_url }}" alt="Advection-diffusion temperature field">
       <div class="overlay">Open PDF</div>
     </a>
   </article>

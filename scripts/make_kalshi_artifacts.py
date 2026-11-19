@@ -171,41 +171,190 @@ def write_pdf():
     pdf.output(str(PDF_PATH))
 
 
-def write_thumbnail():
-    w, h = 1200, 720
-    img = Image.new("RGB", (w, h), "#e8edf2")
-    d = ImageDraw.Draw(img)
-    # staff lines
-    for i in range(5):
-        y = 90 + i * 38
-        d.line([(80, y), (w - 80, y)], fill="#9aa7b4", width=3)
-    # temperature ladder as note heads
-    xs = [180, 340, 500, 660, 820, 980]
-    labels = ["59−", "60–61", "62–63", "64–65", "66–67", "68+"]
-    fills = ["#2d5c52", "#6e322c", "#9a7040", "#2d5c52", "#6e322c", "#1c2733"]
-    for x, lab, fill in zip(xs, labels, fills):
-        cy = 90 + 2 * 38
-        d.ellipse([x - 22, cy - 16, x + 22, cy + 16], fill=fill)
-        d.line([(x + 20, cy), (x + 20, cy - 92)], fill=fill, width=4)
-    try:
-        title_font = ImageFont.truetype(str(FONT_DIR / "DejaVuSerif-Bold.ttf"), 48)
-        sub_font = ImageFont.truetype(str(FONT_DIR / "DejaVuSans.ttf"), 22)
-        small = ImageFont.truetype(str(FONT_DIR / "DejaVuSans.ttf"), 18)
-    except OSError:
-        title_font = sub_font = small = ImageFont.load_default()
-    d.text((80, 340), "KXHIGHNY", font=title_font, fill="#1c2733")
-    d.text(
-        (80, 410),
-        "NYC daily high  ·  Kalshi and Polymarket  ·  NBM, CLINYC, ASOS",
-        font=sub_font,
-        fill="#5a6878",
+def _colormap(t):
+    """Blue → teal → yellow → orange → red. t in [0, 1]."""
+    stops = (
+        (0.00, (22, 72, 148)),
+        (0.22, (46, 140, 196)),
+        (0.40, (92, 188, 168)),
+        (0.55, (236, 214, 112)),
+        (0.72, (228, 138, 52)),
+        (0.88, (196, 62, 42)),
+        (1.00, (128, 24, 36)),
     )
-    d.text((80, 470), "Forecast verification on an ordered temperature ladder", font=sub_font, fill="#5a6878")
-    for x, lab in zip(xs, labels):
-        d.text((x - 28, 290), lab, font=small, fill="#5a6878")
+    if t <= 0:
+        return stops[0][1]
+    if t >= 1:
+        return stops[-1][1]
+    for i in range(1, len(stops)):
+        t0, c0 = stops[i - 1]
+        t1, c1 = stops[i]
+        if t <= t1:
+            u = (t - t0) / (t1 - t0)
+            return tuple(int(a + (b - a) * u) for a, b in zip(c0, c1))
+    return stops[-1][1]
+
+
+def write_thumbnail():
+    """Landscape advection–diffusion panel for the hero card. Illustration only."""
+    import numpy as np
+
+    W, H = 1600, 900
+    left, top, right, bottom = 108, 86, 230, 78
+    pw, ph = W - left - right, H - top - bottom
+    pad = 48
+    ny, nx = ph + 2 * pad, pw + 2 * pad
+    yy = np.linspace(-0.08, 1.08, ny)[:, None]
+    xx = np.linspace(-0.08, 1.08, nx)[None, :]
+
+    temp = 54 + 24 * yy + 3.2 * np.sin(2 * np.pi * xx * 1.4 + 0.6)
+    front = yy - (0.46 + 0.10 * np.sin(2 * np.pi * xx * 1.15 + 0.3))
+    temp = temp + 12 * np.exp(-(front ** 2) / 0.010)
+    temp = temp + 7.5 * np.exp(-((xx - 0.32) ** 2) / 0.018 - ((yy - 0.30) ** 2) / 0.014)
+    temp = temp - 8.0 * np.exp(-((xx - 0.70) ** 2) / 0.028 - ((yy - 0.58) ** 2) / 0.020)
+
+    kappa = 0.20
+    for _ in range(36):
+        padded = np.pad(temp, 1, mode="edge")
+        ddx = temp - padded[1:-1, :-2]
+        ddy = temp - padded[:-2, 1:-1]
+        lap = (
+            padded[:-2, 1:-1]
+            + padded[2:, 1:-1]
+            + padded[1:-1, :-2]
+            + padded[1:-1, 2:]
+            - 4 * temp
+        )
+        speed_x = 0.55 + 0.22 * np.sin(2 * np.pi * yy)
+        speed_y = 0.16 + 0.10 * np.cos(2 * np.pi * xx)
+        temp = temp - speed_x * ddx - speed_y * ddy + kappa * lap
+
+    temp = temp[pad:-pad, pad:-pad]
+    ny, nx = temp.shape
+    tmin, tmax = 50.0, 86.0
+    temp = np.clip(temp, tmin, tmax)
+    norm = (temp - tmin) / (tmax - tmin)
+    stops_t = np.array([0.00, 0.22, 0.40, 0.55, 0.72, 0.88, 1.00])
+    stops_c = np.array(
+        [
+            [22, 72, 148],
+            [46, 140, 196],
+            [92, 188, 168],
+            [236, 214, 112],
+            [228, 138, 52],
+            [196, 62, 42],
+            [128, 24, 36],
+        ],
+        dtype=np.float64,
+    )
+    rgb = np.stack(
+        [np.interp(norm, stops_t, stops_c[:, channel]) for channel in range(3)],
+        axis=-1,
+    ).astype(np.uint8)
+
+    field = Image.fromarray(rgb, "RGB")
+    img = Image.new("RGB", (W, H), "#f4f7fb")
+    img.paste(field, (left, top))
+    draw = ImageDraw.Draw(img)
+
+    try:
+        eq_font = ImageFont.truetype(str(FONT_DIR / "DejaVuSans.ttf"), 28)
+        tick_font = ImageFont.truetype(str(FONT_DIR / "DejaVuSans.ttf"), 18)
+        unit_font = ImageFont.truetype(str(FONT_DIR / "DejaVuSans-Bold.ttf"), 20)
+    except OSError:
+        eq_font = tick_font = unit_font = ImageFont.load_default()
+
+    lats = (43, 42, 41, 40, 39)
+    lons = (78, 77, 76, 75, 74)
+    grid = (28, 39, 51, 90)
+    for lat in lats:
+        y = top + (43 - lat) / 4 * (ph - 1)
+        draw.line([(left, y), (left + pw - 1, y)], fill=grid, width=1)
+        draw.text((left - 12, y), f"{lat}°N", font=tick_font, fill="#1c2733", anchor="rm")
+    for lon in lons:
+        x = left + (78 - lon) / 4 * (pw - 1)
+        draw.line([(x, top), (x, top + ph - 1)], fill=grid, width=1)
+        draw.text((x, top + ph + 10), f"{lon}°W", font=tick_font, fill="#1c2733", anchor="mt")
+    draw.rectangle([left, top, left + pw - 1, top + ph - 1], outline="#1c2733", width=2)
+
+    step = 2
+    smooth = temp
+    for _ in range(2):
+        padded_s = np.pad(smooth, 1, mode="edge")
+        smooth = (
+            padded_s[:-2, 1:-1]
+            + padded_s[2:, 1:-1]
+            + padded_s[1:-1, :-2]
+            + padded_s[1:-1, 2:]
+            + 4 * smooth
+        ) / 8
+    sample = smooth[::step, ::step]
+    levels = (54, 58, 62, 66, 70, 74, 78, 82)
+
+    def edge_point(va, vb, p, q):
+        if va == vb:
+            t = 0.5
+        else:
+            t = (level - va) / (vb - va)
+            t = 0.0 if t < 0 else 1.0 if t > 1 else t
+        return (p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t)
+
+    segments = {
+        1: (3, 2), 2: (2, 1), 3: (3, 1), 4: (0, 1),
+        5: (0, 3, 1, 2), 6: (0, 2), 7: (0, 3), 8: (0, 3),
+        9: (0, 2), 10: (0, 1, 2, 3), 11: (0, 1), 12: (3, 1),
+        13: (2, 1), 14: (3, 2),
+    }
+    sh, sw = sample.shape
+    for level in levels:
+        for i in range(1, sh - 2):
+            row = sample[i]
+            nxt = sample[i + 1]
+            for j in range(1, sw - 2):
+                va, vb = float(row[j]), float(row[j + 1])
+                vc, vd = float(nxt[j + 1]), float(nxt[j])
+                code = (va >= level) << 3 | (vb >= level) << 2 | (vc >= level) << 1 | (vd >= level)
+                if code in (0, 15):
+                    continue
+                corners = (
+                    (j * step, i * step),
+                    ((j + 1) * step, i * step),
+                    ((j + 1) * step, (i + 1) * step),
+                    (j * step, (i + 1) * step),
+                )
+                values = (va, vb, vc, vd)
+                edges = (
+                    edge_point(values[0], values[1], corners[0], corners[1]),
+                    edge_point(values[1], values[2], corners[1], corners[2]),
+                    edge_point(values[2], values[3], corners[2], corners[3]),
+                    edge_point(values[3], values[0], corners[3], corners[0]),
+                )
+                seq = segments[code]
+                for k in range(0, len(seq), 2):
+                    e0, e1 = edges[seq[k]], edges[seq[k + 1]]
+                    x0, y0 = left + e0[0], top + e0[1]
+                    x1, y1 = left + e1[0], top + e1[1]
+                    draw.line([(x0, y0), (x1, y1)], fill=(28, 39, 51), width=4)
+                    draw.line([(x0, y0), (x1, y1)], fill=(255, 255, 255), width=2)
+
+    bar_x = left + pw + 28
+    bar_w = 22
+    col = np.zeros((ph, bar_w, 3), dtype=np.uint8)
+    for y in range(ph):
+        col[y, :] = _colormap(1 - y / (ph - 1))
+    bar = Image.fromarray(col, "RGB")
+    img.paste(bar, (bar_x, top))
+    draw.rectangle([bar_x, top, bar_x + bar_w - 1, top + ph - 1], outline="#1c2733", width=1)
+    draw.text((bar_x + bar_w + 36, top - 4), "°F", font=unit_font, fill="#1c2733", anchor="lt")
+    for value in (50, 60, 70, 80):
+        y = top + (tmax - value) / (tmax - tmin) * (ph - 1)
+        draw.line([(bar_x + bar_w, y), (bar_x + bar_w + 8, y)], fill="#1c2733", width=1)
+        draw.text((bar_x + bar_w + 12, y), str(value), font=tick_font, fill="#1c2733", anchor="lm")
+
+    draw.text((left, 36), "∂t T + v·∇T = κ∇²T", font=eq_font, fill="#1c2733", anchor="lt")
+
     THUMB_PATH.parent.mkdir(parents=True, exist_ok=True)
     img.save(THUMB_PATH, "PNG", optimize=True)
-
 
 if __name__ == "__main__":
     write_pdf()
