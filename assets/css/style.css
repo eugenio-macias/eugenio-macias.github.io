@@ -36,17 +36,28 @@ html {
 body {
   margin: 0;
   color: var(--ink);
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      transparent 0 47px,
-      rgba(154, 167, 180, 0.18) 47px 48px
-    ),
-    var(--paper);
-  background-attachment: fixed;
+  background: transparent;
   font-family: "Atkinson Hyperlegible", "Segoe UI", sans-serif;
   font-size: 1.05rem;
   line-height: 1.65;
+}
+
+/* Staff drift lives on one composited layer. Scroll only changes its transform. */
+.score-lines {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: -48px;
+  height: calc(100% + 96px);
+  z-index: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 47px,
+    rgba(154, 167, 180, 0.28) 47px 48px
+  );
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
 }
 
 img { max-width: 100%; height: auto; display: block; }
@@ -86,16 +97,34 @@ a:hover { color: var(--verdigris); }
   position: sticky;
   top: 0;
   z-index: 40;
-  background: color-mix(in srgb, var(--paper) 88%, white);
-  backdrop-filter: blur(8px);
+  background: color-mix(in srgb, var(--paper) 92%, white);
   border-bottom: 1px solid var(--line);
 }
 
 .staff {
+  position: relative;
   display: grid;
   grid-template-rows: repeat(5, 1fr);
-  height: 14px;
+  height: 16px;
   overflow: hidden;
+}
+.note-head {
+  grid-row: 1;
+  grid-column: 1;
+  position: absolute;
+  top: 4px;
+  left: 0;
+  width: 11px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--rosewood);
+  box-shadow: 8px 0 0 -3px var(--brass);
+  animation: note-travel 18s linear infinite;
+  will-change: transform;
+}
+@keyframes note-travel {
+  from { transform: translate3d(-20px, 0, 0); }
+  to { transform: translate3d(100vw, 0, 0); }
 }
 .staff span {
   border-top: 1px solid var(--staff);
@@ -171,14 +200,31 @@ a:hover { color: var(--verdigris); }
 }
 .icon-link:hover { color: var(--rosewood); }
 
+.instrument {
+  position: relative;
+  z-index: 1;
+  height: 112px;
+  touch-action: none;
+  cursor: crosshair;
+}
+.instrument canvas {
+  display: block;
+  width: 100%;
+  height: 112px;
+}
+
 main {
+  position: relative;
+  z-index: 1;
   max-width: 1180px;
   margin: 0 auto;
-  padding: 1.5rem 1.25rem 4rem;
+  padding: 1.25rem 1.25rem 4rem;
   min-height: 70vh;
 }
 
 .site-footer {
+  position: relative;
+  z-index: 1;
   max-width: 1180px;
   margin: 0 auto;
   padding: 1.5rem 1.25rem 2.5rem;
@@ -234,7 +280,11 @@ p { margin: 0 0 0.9rem; max-width: var(--measure); }
   inset: 0 auto 0 0;
   width: 5px;
   background: var(--rosewood);
+  transform: scaleY(0);
+  transform-origin: top center;
+  animation: spine 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
 }
+@keyframes spine { to { transform: scaleY(1); } }
 .portrait img {
   width: 100%;
   aspect-ratio: 1;
@@ -343,7 +393,9 @@ p { margin: 0 0 0.9rem; max-width: var(--measure); }
   height: 100%;
   max-height: 220px;
   object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
+.project-card:hover .pc-media img { transform: scale(1.04); }
 a.thumb-link {
   display: block;
   color: inherit;

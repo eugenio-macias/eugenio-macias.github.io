@@ -8,15 +8,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
 <body>
   <a class="skip" href="#content">Skip to content</a>
+  <div class="score-lines" id="scoreLines" aria-hidden="true"></div>
   <div class="scroll-bar" id="scrollBar" aria-hidden="true"></div>
 
   <header class="site-header">
     <div class="staff" aria-hidden="true">
       <span></span><span></span><span></span><span></span><span></span>
+      <i class="note-head"></i>
     </div>
     <div class="header-row">
       <a class="wordmark" href="{{ '/' | relative_url }}">Eugenio Macías</a>
@@ -49,6 +52,10 @@
       </div>
     </div>
   </header>
+
+  <div class="instrument">
+    <canvas id="strings" role="img" aria-label="Six guitar strings. Move across them to pluck."></canvas>
+  </div>
 
   <main id="content">
     {{ content }}
