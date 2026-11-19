@@ -76,6 +76,36 @@
   bindTilt(".project-card", 7);
   bindTilt(".note-card", 8);
 
+  var mathField = document.getElementById("mathField");
+  if (mathField && !reduce) {
+    var glyphs = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "π", "∑", "∫", "∂", "∇", "∞", "α", "β", "λ", "σ", "Δ", "θ", "≈", "√", "μ"];
+    for (var g = 0; g < 22; g++) {
+      var node = document.createElement("span");
+      node.className = "math-glyph";
+      node.textContent = glyphs[g % glyphs.length];
+      node.style.setProperty("--x", (2 + (g * 4.3) % 94) + "%");
+      node.style.setProperty("--sz", (16 + (g % 5) * 6) + "px");
+      node.style.setProperty("--dur", (14 + (g % 7) * 2.2) + "s");
+      node.style.setProperty("--delay", (-g * 0.85) + "s");
+      node.style.setProperty("--dx", ((g % 2 ? 1 : -1) * (18 + (g % 5) * 14)) + "px");
+      node.style.setProperty("--rot", ((g % 2 ? 1 : -1) * (16 + g * 7)) + "deg");
+      mathField.appendChild(node);
+    }
+  }
+  if (!reduce && document.querySelector(".projects-page")) {
+    document.querySelectorAll(".projects-hero h1, .pc-title").forEach(function (el) {
+      var text = el.textContent;
+      el.textContent = "";
+      el.classList.add("falling-letters");
+      Array.from(text).forEach(function (ch, idx) {
+        var span = document.createElement("span");
+        span.textContent = ch;
+        span.style.setProperty("--d", (idx * 16) + "ms");
+        el.appendChild(span);
+      });
+    });
+  }
+
   if (!canvas || !canvas.getContext) return;
 
   var STRINGS = 6;

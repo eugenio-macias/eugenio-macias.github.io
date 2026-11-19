@@ -3,8 +3,8 @@
 
 :root {
   --paper: #e8edf2;
-  --ink: #1c2733;
-  --muted: #5a6878;
+  --ink: #0c1218;
+  --muted: #243040;
   --line: #c5ced8;
   --staff: #9aa7b4;
   --rosewood: #6e322c;
@@ -45,7 +45,9 @@ body {
   background: transparent;
   font-family: "Atkinson Hyperlegible", "Segoe UI", sans-serif;
   font-size: 1.05rem;
+  font-weight: 700;
   line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Staff drift lives on one composited layer. Scroll only changes its transform. */
@@ -118,7 +120,7 @@ a:hover { color: var(--verdigris); }
   position: sticky;
   top: 0;
   z-index: 40;
-  background: rgba(244, 247, 250, 0.78);
+  background: rgba(244, 247, 250, 0.94);
   border-bottom: 1px solid var(--line);
 }
 
@@ -171,7 +173,7 @@ a:hover { color: var(--verdigris); }
 
 .wordmark {
   font-family: Petrona, Georgia, serif;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.35rem;
   letter-spacing: -0.02em;
   color: var(--ink);
@@ -281,7 +283,7 @@ main {
 
 h1, h2, h3, .pc-title, .note-text h3 {
   font-family: Petrona, Georgia, serif;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--ink);
   line-height: 1.2;
@@ -433,7 +435,7 @@ main:has(.notes-grid) { max-width: 1640px; }
   gap: 14px;
   text-decoration: none;
   color: inherit;
-  background: rgba(255, 255, 255, 0.82);
+  background: #fff;
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 14px;
@@ -465,7 +467,7 @@ main:has(.notes-grid) { max-width: 1640px; }
   margin: 0 0 0.35rem;
   font-size: 1.05rem;
   line-height: 1.25;
-  background: linear-gradient(90deg, #7c83ff 0%, #22d3ee 35%, #34d399 65%, #a78bfa 85%, #7c83ff 100%);
+  background: linear-gradient(90deg, #1b1464 0%, #0c4f66 35%, #0d4a34 65%, #1b1464 100%);
   background-size: 300% 100%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -480,7 +482,7 @@ main:has(.notes-grid) { max-width: 1640px; }
 }
 .project-card:hover .pc-title { animation-duration: 2.4s; }
 .pc-sub { margin: 0.1rem 0 0.5rem; color: var(--muted); font-size: 0.92rem; }
-.pc-desc { margin: 0; color: var(--muted); max-width: none; }
+.pc-desc { margin: 0 0 0.45rem; color: var(--ink); max-width: none; }
 .pc-cta {
   margin-top: 0.7rem;
   display: inline-block;
@@ -531,11 +533,30 @@ main:has(.notes-grid) { max-width: 1640px; }
   transform: scale(1.02);
   transition: transform 0.4s ease, opacity 0.35s ease, filter 0.35s ease;
 }
-.project-card:hover .pc-media img,
-.note-card:hover .note-thumb img {
+.project-card:hover .pc-media img {
   transform: scale(1.08) rotate(0.4deg);
   opacity: 1;
   filter: saturate(1.08);
+}
+.media-stack {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+.hero-card .media-stack .pc-media img {
+  max-height: 240px;
+  height: auto;
+  object-fit: contain;
+  background: #f7f8fb;
+}
+.top5-grid .media-stack { order: -1; }
+.top5-grid .media-stack .pc-media {
+  height: 148px;
+  max-height: 148px;
+}
+.top5-grid .media-stack .pc-media img {
+  object-fit: contain;
+  background: #f7f8fb;
 }
 .overlay {
   position: absolute;
@@ -594,7 +615,7 @@ summary { cursor: pointer; font-weight: 700; }
 }
 .notes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(460px, 100%), 1fr));
   gap: 18px;
   margin: 0 0 2.2rem;
   align-items: stretch;
@@ -622,9 +643,6 @@ summary { cursor: pointer; font-weight: 700; }
   from { transform: translateY(10px) scale(0.99); opacity: 0; }
   to { transform: none; opacity: 1; }
 }
-@media (min-width: 860px) {
-  .note-card { grid-template-columns: 1.2fr 0.9fr; }
-}
 .note-card:hover {
   border-color: transparent;
   box-shadow: 0 26px 60px rgba(28, 39, 51, 0.16);
@@ -651,7 +669,7 @@ summary { cursor: pointer; font-weight: 700; }
   margin: 0 0 0.35rem;
   font-size: 1.05rem;
   line-height: 1.25;
-  background: linear-gradient(90deg, #7c83ff 0%, #22d3ee 35%, #34d399 65%, #a78bfa 85%, #7c83ff 100%);
+  background: linear-gradient(90deg, #1b1464 0%, #0c4f66 35%, #0d4a34 65%, #1b1464 100%);
   background-size: 300% 100%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -681,7 +699,22 @@ summary { cursor: pointer; font-weight: 700; }
   background: linear-gradient(90deg, #3b82f6, #22c55e);
   border: 0;
 }
-.note-thumb { min-height: 160px; }
+.note-thumb {
+  order: -1;
+  background: #fff;
+}
+.note-thumb img,
+.note-card:hover .note-thumb img {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  object-position: center;
+  background: #fff;
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
 
 /* Skills */
 .cards-grid {
@@ -855,6 +888,56 @@ summary::-webkit-details-marker { display: none; }
 table { width: 100%; border-collapse: collapse; }
 td { vertical-align: top; padding: 0.4rem 0; }
 .prose a, main a { overflow-wrap: anywhere; }
+
+.falling-letters {
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  color: var(--ink);
+  animation: none;
+}
+.falling-letters span {
+  display: inline-block;
+  white-space: pre;
+  opacity: 0;
+  font-weight: 700;
+  background: linear-gradient(90deg, #1b1464, #0c4f66, #0d4a34);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: letterFall 0.42s ease forwards;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes letterFall {
+  from { transform: translateY(-18px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+.math-field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.math-glyph {
+  position: absolute;
+  left: var(--x);
+  top: -12%;
+  font-family: Petrona, Georgia, serif;
+  font-weight: 700;
+  font-size: var(--sz);
+  color: rgba(12, 18, 24, 0.38);
+  animation: glyphFly var(--dur) linear var(--delay) infinite;
+  will-change: transform;
+}
+@keyframes glyphFly {
+  0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0; }
+  12% { opacity: 0.95; }
+  88% { opacity: 0.8; }
+  100% { transform: translate3d(var(--dx), 118vh, 0) rotate(var(--rot)); opacity: 0; }
+}
 
 /* Kill leftover theme / old neon */
 .aurora, .aurora-global, .aurora-deep, .aurora-ring,

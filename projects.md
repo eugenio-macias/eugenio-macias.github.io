@@ -16,9 +16,12 @@ title: Projects
       <p class="pc-desc">
         Kalshi lists a daily ladder of contracts on New York City’s maximum temperature. Each strike is a yes/no on a temperature bracket; together they are supposed to partition the day’s high. International Polymarket lists a related NYC ladder. The venues do not settle the same observation: Kalshi currently names The Weather Company’s CLINYC report, while the Polymarket collector in this project records NOAA KLGA hourly observations. Same-city contracts are not the same instrument.
       </p>
-      <p class="pc-desc">
-        The work is forecast verification and data infrastructure. I ask whether market-implied probabilities beat NOAA’s National Blend of Models on proper scores (Brier, with Murphy’s reliability/resolution split, and ranked probability score on the ordered ladder), at which horizons, and after the climate day is defined carefully. I also ask whether a statistical model that sees ensemble weather, live observations, and order flow can correct those implied probabilities, and whether quoted spreads at T−24h leave any room for a taker.
-      </p>
+      <ul class="bullets">
+        <li>Kalshi’s KXHIGHNY ladder and the Polymarket NYC ladder do not settle the same observation: CLINYC versus KLGA.</li>
+        <li>Scores: Brier with Murphy’s reliability/resolution split, ranked probability score, and a clustered bootstrap over climate days.</li>
+        <li>NOAA NBM percentiles read by HTTP byte-range against <code>.idx</code> files; crash-safe gzip JSONL loggers with no order placement.</li>
+        <li>At T−24h, 4–6¢ spreads typically kill takers. KLGA and KNYC disagree on the bracket about 61.5% of the time in the published summary.</li>
+      </ul>
       <details>
         <summary>Data, methods, and what I built</summary>
         <ul class="bullets">
@@ -55,9 +58,12 @@ title: Projects
     <div class="pc-text">
       <h2 class="pc-title">Honors thesis — weak-form PDE discovery for stochastic collective dynamics</h2>
       <p class="pc-sub">Advisor: Prof. Björn Sandstede · Brown University</p>
-      <p class="pc-desc">
-        Applied WSINDy to recover interpretable coupled PDEs for macroscopic density evolution from noisy Vicsek-alignment and Morse attraction–repulsion trajectories. Sparsity via MSTLS; time integration via ETDRK4. Density fit R² &gt; 0.99 in 8 of 9 regimes; momentum closure failed, which led to a closure-imbalance diagnostic. Equation-free ROMs (FFT symmetry reduction, POD): a 1,824-parameter MVAR matched a much larger LSTM. Open-source package with simulator, coarse-graining, WSINDy, ETDRK4, and reproduction scripts.
-      </p>
+      <ul class="bullets">
+        <li>WSINDy on noisy Vicsek-alignment and Morse attraction–repulsion trajectories; sparsity by MSTLS; time stepping by ETDRK4.</li>
+        <li>Density fit R² &gt; 0.99 in 8 of 9 regimes. Momentum closure failed, which produced a closure-imbalance diagnostic.</li>
+        <li>Equation-free ROMs: FFT symmetry reduction and POD. A 1,824-parameter MVAR matched a much larger LSTM.</li>
+        <li>Open-source package: simulator, coarse-graining, WSINDy, ETDRK4, and reproduction scripts.</li>
+      </ul>
       <details>
         <summary>Technical scope</summary>
         <ul class="bullets">
@@ -76,10 +82,16 @@ title: Projects
         <a class="pc-link" href="{{ '/Thesis_presentation.pdf' | relative_url }}" target="_blank" rel="noopener">Slides</a>
       </div>
     </div>
-    <a class="thumb-link pc-media" href="{{ '/Thesis.pdf' | relative_url }}" target="_blank" rel="noopener">
-      <img src="{{ '/assets/images/thumbnails/Thesis_thumbnail.png' | relative_url }}" alt="Thesis thumbnail">
-      <div class="overlay">Open PDF</div>
-    </a>
+    <div class="media-stack">
+      <a class="thumb-link pc-media" href="{{ '/Thesis.pdf' | relative_url }}" target="_blank" rel="noopener">
+        <img src="{{ '/assets/images/thumbnails/Thesis_thumbnail.png' | relative_url }}" alt="Thesis thumbnail">
+        <div class="overlay">Thesis PDF</div>
+      </a>
+      <a class="thumb-link pc-media" href="{{ '/Thesis_presentation.pdf' | relative_url }}" target="_blank" rel="noopener">
+        <img src="{{ '/assets/images/thumbnails/thesis_slides_thumbnail.png' | relative_url }}" alt="Density field and particle trajectories from the thesis slides">
+        <div class="overlay">Slides</div>
+      </a>
+    </div>
   </article>
 
   <div class="projects-grid top5-grid">
@@ -88,9 +100,11 @@ title: Projects
       <div class="pc-text">
         <h3 class="pc-title">Optimizing the optimizer: self-scaled quasi-Newton methods for PINNs</h3>
         <p class="pc-sub">Karniadakis Lab · with Don C. Wong · January–May 2026</p>
-        <p class="pc-desc">
-          PINNs on the fourth-order Cahn–Hilliard equation on [0,128]². Benchmarked Adam, BFGS, L-BFGS-B, and self-scaled BFGS/Broyden variants. Self-scaled Broyden cut relative L₂ error to 0.32 versus 0.79 for L-BFGS-B on the 64² domain (three seeds). Nested autodiff residuals, periodic boundary conditions, RAD sampling, 53 configurations and 100+ seeded runs on SLURM, checked against a pseudo-spectral ETDRK4 reference.
-        </p>
+        <ul class="bullets">
+          <li>Fourth-order Cahn–Hilliard PINN on [0,128]², periodic boundaries, nested autodiff residuals, RAD sampling.</li>
+          <li>Self-scaled Broyden: relative L₂ 0.32 versus 0.79 for L-BFGS-B on 64², three seeds.</li>
+          <li>53 configurations and 100+ seeded SLURM runs, checked against a pseudo-spectral ETDRK4 reference.</li>
+        </ul>
         <div class="badges">
           <span class="badge">PINNs</span><span class="badge">Quasi-Newton</span><span class="badge">Cahn–Hilliard</span>
         </div>
@@ -99,19 +113,27 @@ title: Projects
           <a class="pc-link" href="{{ '/DRP_poster.pdf' | relative_url }}" target="_blank" rel="noopener">Poster</a>
         </div>
       </div>
-      <a class="thumb-link pc-media" href="{{ '/DRP_paper.pdf' | relative_url }}" target="_blank" rel="noopener">
-        <img src="{{ '/assets/images/thumbnails/DRP_thumbnail2.png' | relative_url }}" alt="PINN optimizer study thumbnail">
-        <div class="overlay">Open PDF</div>
-      </a>
+      <div class="media-stack">
+        <a class="thumb-link pc-media" href="{{ '/DRP_paper.pdf' | relative_url }}" target="_blank" rel="noopener">
+          <img src="{{ '/assets/images/thumbnails/DRP_thumbnail2.png' | relative_url }}" alt="PINN optimizer study thumbnail">
+          <div class="overlay">Paper</div>
+        </a>
+        <a class="thumb-link pc-media" href="{{ '/DRP_poster.pdf' | relative_url }}" target="_blank" rel="noopener">
+          <img src="{{ '/assets/images/thumbnails/pinn_poster_thumbnail.png' | relative_url }}" alt="Cahn–Hilliard phase field from the PINN poster">
+          <div class="overlay">Poster</div>
+        </a>
+      </div>
     </article>
 
     <article class="project-card">
       <div class="pc-text">
         <h3 class="pc-title">Curiosity-driven transfer in ProcGen</h3>
         <p class="pc-sub">Advisor: Prof. George Konidaris</p>
-        <p class="pc-desc">
-          PPO with an IMPALA-CNN backbone on ProcGen. Factorial sweep over ICM, RND, CFN, and NLL-Surprise, with clip/RMS normalization and η as primary variables. Zero-shot and fine-tuned transfer; CLIP reward shaping for semantics-aware coverage. Probed 507 PPO checkpoints on 12 Procgen games; an ICM cutoff lifted probe accuracy to 0.914 versus 0.812. Always-on curiosity collapsed features (rank about 4/256, 85.7% dead units).
-        </p>
+        <ul class="bullets">
+          <li>PPO with an IMPALA-CNN on ProcGen. Sweep over ICM, RND, CFN, and NLL-Surprise.</li>
+          <li>507 checkpoints on 12 games. An ICM cutoff lifted probe accuracy to 0.914 versus 0.812.</li>
+          <li>Always-on curiosity collapsed features: rank about 4/256, 85.7% dead units.</li>
+        </ul>
         <div class="badges">
           <span class="badge">RL</span><span class="badge">PPO</span><span class="badge">Curiosity</span>
         </div>
@@ -129,9 +151,10 @@ title: Projects
     <a class="project-card" href="{{ '/assets/files/electron_dynamics_DL.pdf' | relative_url }}" target="_blank" rel="noopener">
       <div class="pc-text">
         <h3 class="pc-title">Hamiltonian and symplectic networks for charged particle dynamics</h3>
-        <p class="pc-desc">
-          Poisson neural nets with PDE-residual losses learn Hamiltonian structure and invert for charge and mass. Symplectic/volume-preserving architectures aligned with the flow.
-        </p>
+        <ul class="bullets">
+          <li>Poisson neural nets with PDE-residual losses learn Hamiltonian structure.</li>
+          <li>Invert for charge and mass. Symplectic blocks stay aligned with the flow.</li>
+        </ul>
         <div class="badges">
           <span class="badge">Symplectic NN</span><span class="badge">Physics-ML</span>
         </div>
@@ -146,9 +169,10 @@ title: Projects
     <a class="project-card" href="{{ '/ECON_1750_PCA (1).pdf' | relative_url }}" target="_blank" rel="noopener">
       <div class="pc-text">
         <h3 class="pc-title">PCA investing: eigen-portfolios for market-neutral strategies</h3>
-        <p class="pc-desc">
-          PCA on returns, risk-normalized eigen-portfolios, out-of-sample Sharpe/IR, cumulative-return plots, dynamic allocation to limit look-ahead bias.
-        </p>
+        <ul class="bullets">
+          <li>PCA on returns, then risk-normalized eigen-portfolios.</li>
+          <li>Out-of-sample Sharpe and information ratio, with dynamic allocation to limit look-ahead bias.</li>
+        </ul>
         <div class="badges">
           <span class="badge">Quant</span><span class="badge">PCA</span>
         </div>
@@ -163,9 +187,10 @@ title: Projects
     <a class="project-card" href="{{ '/assets/files/Extended_Essay.pdf' | relative_url }}" target="_blank" rel="noopener">
       <div class="pc-text">
         <h3 class="pc-title">Fourier-series solutions of 2-D Laplace boundary-value problems</h3>
-        <p class="pc-desc">
-          About fifty pages on Fourier methods for 2-D Laplace with Dirichlet boundaries; L² convergence and truncation error.
-        </p>
+        <ul class="bullets">
+          <li>Fourier methods for the 2-D Laplace equation with Dirichlet boundaries.</li>
+          <li>L² convergence and truncation error, about fifty pages.</li>
+        </ul>
         <div class="badges">
           <span class="badge">Fourier</span><span class="badge">PDE</span>
         </div>
