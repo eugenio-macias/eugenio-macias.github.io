@@ -264,7 +264,7 @@ main {
   z-index: 1;
   max-width: 1180px;
   margin: 0 auto;
-  padding: 1.5rem 230px 2.5rem 1.25rem;
+  padding: 1.5rem 310px 2.5rem 1.25rem;
   border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: 0.95rem;
@@ -293,74 +293,130 @@ h3 { font-size: 1.15rem; margin: 1.1rem 0 0.4rem; }
 p { margin: 0 0 0.9rem; max-width: var(--measure); }
 .lede, .subtitle { color: var(--muted); font-size: 1.08rem; }
 
-/* Home */
-.hero {
+/* Home: the earlier photo-and-cards layout, on the light page. */
+.home-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2.2rem 2.8rem;
+  gap: 1.3rem 1.8rem;
   align-items: start;
-  margin-bottom: 2.4rem;
 }
-@media (min-width: 860px) {
-  .hero { grid-template-columns: minmax(280px, 340px) minmax(0, 1fr); }
+@media (min-width: 980px) {
+  .home-grid { grid-template-columns: minmax(240px, 0.72fr) 2fr; }
 }
-@media (min-width: 1100px) {
-  .hero { grid-template-columns: 400px minmax(0, 1fr); }
+.home-side {
+  display: grid;
+  gap: 0.9rem;
+  justify-items: center;
 }
-.hero-side { display: grid; gap: 0.9rem; align-content: start; }
+.pfp-wrap {
+  position: relative;
+  width: min(300px, 78vw);
+  aspect-ratio: 1;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 3px solid transparent;
+  background:
+    linear-gradient(var(--plate), var(--plate)) padding-box,
+    conic-gradient(from 200deg, var(--rosewood), var(--brass), var(--verdigris), var(--rosewood)) border-box;
+  box-shadow: var(--shadow);
+}
+.pfp-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 18%;
+  display: block;
+  border-radius: 20px;
+}
+
+.home-intro h1 { margin-bottom: 0.45rem; }
+.intro-kicker {
+  font-family: Petrona, Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--muted);
+  margin: 0 0 0.15rem;
+}
+.degree-pill {
+  display: inline-block;
+  margin: 0 0 0.85rem;
+  max-width: none;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-family: "Atkinson Hyperlegible", "Segoe UI", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+.about-card,
+.home-card,
 .interest-box {
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 16px;
-  padding: 0.85rem 0.95rem 0.95rem;
   box-shadow: var(--shadow);
 }
-.interest-box h2 { margin: 0 0 0.3rem; font-size: 1.2rem; }
-.interest-box p { margin: 0 0 0.45rem; max-width: none; color: var(--ink); font-size: 0.95rem; }
-.interest-box ul { margin: 0; padding-left: 1.1rem; }
-.interest-box li { margin: 0.16rem 0; font-size: 0.92rem; color: var(--ink); }
-@media (max-width: 800px) {
-  .hero { grid-template-columns: 1fr; }
+.about-card {
+  padding: 0.95rem 1.05rem 1.05rem;
 }
+.about-card h2 { margin: 0 0 0.45rem; font-size: 1.2rem; }
+.bio,
+.bio p,
+.home-card,
+.home-card li,
+.degree-pill {
+  font-family: "Atkinson Hyperlegible", "Segoe UI", sans-serif;
+  font-weight: 400;
+}
+.bio p { font-size: 1.02rem; max-width: 68ch; margin: 0 0 0.75rem; }
+.bio p:last-child { margin-bottom: 0; }
 
-.portrait {
-  position: relative;
-  width: 100%;
-  background: var(--plate);
-  box-shadow: var(--shadow);
-  border: 1px solid var(--line);
-}
-.portrait::after {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 5px;
-  background: var(--rosewood);
-  transform: scaleY(0);
-  transform-origin: top center;
-  animation: spine 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
-}
-@keyframes spine { to { transform: scaleY(1); } }
-.portrait img {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  object-position: 50% 18%;
-}
-
-.intro-kicker {
+.interest-box { width: min(300px, 100%); padding: 0.85rem 0.9rem 0.95rem; }
+.interest-box h2 { margin: 0 0 0.2rem; font-size: 1.15rem; }
+.interest-lead {
+  margin: 0 0 0.55rem;
+  max-width: none;
   font-family: Petrona, Georgia, serif;
   font-style: italic;
+  font-weight: 500;
+  font-size: 1.02rem;
+  line-height: 1.35;
   color: var(--muted);
-  margin: 0 0 0.2rem;
 }
-.degrees { color: var(--muted); margin-bottom: 1rem; }
+.interest-box ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.42rem; }
+.interest-box li {
+  display: flex;
+  gap: 0.45rem;
+  align-items: flex-start;
+  margin: 0;
+  font-family: "Atkinson Hyperlegible", "Segoe UI", sans-serif;
+  font-weight: 400;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  color: var(--ink);
+}
+.interest-box svg { flex: 0 0 auto; margin-top: 0.12rem; color: var(--rosewood); }
 
-.bio p { font-size: 1.05rem; }
-.bio p:last-child { margin-bottom: 0; }
+.highlights { margin-top: 1.6rem; }
+.highlights h2 { margin-top: 0; }
+.home-cards {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 980px) {
+  .home-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.home-card { padding: 0.9rem 1rem 1rem; }
+.home-card h3 { margin: 0 0 0.45rem; font-size: 1.12rem; }
+.home-card ul { margin: 0; padding-left: 1.05rem; }
+.home-card li { margin: 0.35rem 0; line-height: 1.45; }
 @media (min-width: 1100px) {
-  .intro .bio,
-  .intro .resume-row { margin-right: 130px; }
+  .home-intro .about-card,
+  .highlights { margin-right: 210px; }
 }
 
 .resume-row {
@@ -376,31 +432,6 @@ p { margin: 0 0 0.9rem; max-width: var(--measure); }
   border-bottom: 1px solid var(--brass);
 }
 .resume-row a:hover { color: var(--rosewood); }
-
-.now {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  padding: 1.4rem 0;
-  margin: 0 0 2rem;
-}
-.now h2 { margin-top: 0; }
-.now p, .now ul { max-width: 78ch; }
-.now ul { margin: 0.4rem 0 0; padding-left: 1.15rem; }
-.now li { margin: 0.3rem 0; }
-
-.home-list {
-  display: grid;
-  gap: 1.1rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.home-list li {
-  padding-left: 1rem;
-  border-left: 3px solid var(--verdigris);
-  max-width: 78ch;
-}
-.home-list strong { font-family: Petrona, Georgia, serif; font-weight: 600; }
 
 /* Projects and notes share the old card chrome: rounded plates, gradient titles, sheen, glow. */
 main:has(.projects-page),
@@ -916,12 +947,12 @@ td { vertical-align: top; padding: 0.4rem 0; }
   right: 14px;
   bottom: 12px;
   z-index: 35;
-  width: 196px;
+  width: 280px;
   pointer-events: none;
 }
 .earth-dock canvas {
-  width: 196px;
-  height: 196px;
+  width: 280px;
+  height: 280px;
   display: block;
   pointer-events: auto;
   cursor: crosshair;
@@ -939,10 +970,12 @@ td { vertical-align: top; padding: 0.4rem 0; }
   padding: 0.18rem 0.45rem;
 }
 @media (max-width: 720px) {
-  .earth-dock { width: 128px; right: 8px; bottom: 8px; }
-  .earth-dock canvas { width: 128px; height: 128px; }
-  .earth-caption { font-size: 0.65rem; }
-  .site-footer { padding-right: 1.25rem; padding-bottom: 158px; }
+  .earth-dock { width: 168px; right: 8px; bottom: 8px; }
+  .earth-dock canvas { width: 168px; height: 168px; }
+  .earth-caption { font-size: 0.68rem; }
+  .site-footer { padding-right: 1.25rem; padding-bottom: 210px; }
+  .home-intro .about-card,
+  .highlights { margin-right: 0; }
 }
 
 .falling-letters {
