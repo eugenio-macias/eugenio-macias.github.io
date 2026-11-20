@@ -48,7 +48,7 @@
   }
 
   var here = location.pathname.replace(/\/$/, "") || "/";
-  document.querySelectorAll(".primary-nav a").forEach(function (a) {
+  document.querySelectorAll(".primary-nav a, .dock-nav a").forEach(function (a) {
     var path = (a.pathname || "").replace(/\/$/, "") || "/";
     if (path === here) a.setAttribute("aria-current", "page");
   });
@@ -104,18 +104,44 @@
       mathField.appendChild(node);
     }
   }
-  if (!reduce && document.querySelector(".projects-page")) {
-    document.querySelectorAll(".string-title, .pc-title").forEach(function (el) {
-      var text = el.textContent;
-      el.textContent = "";
-      el.classList.add("falling-letters");
-      Array.from(text).forEach(function (ch, idx) {
-        var span = document.createElement("span");
-        span.textContent = ch;
-        span.style.setProperty("--d", (idx * 16) + "ms");
-        el.appendChild(span);
-      });
-    });
+  if (!reduce && (document.querySelector(".projects-page") || document.querySelector(".course-grid"))) {
+    var cipher = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789∑∫∂∇αβλσπ∞#";
+    function scramble(el) {
+      if (!el || el.dataset.scrambled) return;
+      el.dataset.scrambled = "1";
+      var html = el.innerHTML;
+      var orig = el.textContent;
+      var frame = 0;
+      var total = orig.length + 16;
+      el.classList.add("decrypting");
+      var timer = setInterval(function () {
+        var cut = (frame / 2) | 0;
+        el.textContent = Array.from(orig).map(function (ch, i) {
+          if (ch === " " || ch === "\n" || ch === "·" || ch === "-" || ch === "—" || ch === "," || ch === ".") return ch;
+          return i < cut ? ch : cipher[(Math.random() * cipher.length) | 0];
+        }).join("");
+        frame += 1;
+        if (frame >= total) {
+          clearInterval(timer);
+          el.classList.remove("decrypting");
+          el.innerHTML = html;
+        }
+      }, 18);
+    }
+    if (pageTitle) scramble(pageTitle);
+    var targets = document.querySelectorAll(".pc-title, .course-card header, .panel h2, summary > span:first-child");
+    if ("IntersectionObserver" in window) {
+      var seen = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          scramble(entry.target);
+          seen.unobserve(entry.target);
+        });
+      }, { threshold: 0.45 });
+      targets.forEach(function (el) { seen.observe(el); });
+    } else {
+      targets.forEach(scramble);
+    }
   }
 
   if (!canvas || !canvas.getContext) return;
@@ -140,6 +166,31 @@
   var raf = 0;
   var lastX = -1;
   var lastY = -1;
+  var notesLive = 0;
+  var lastNote = 0;
+  var NOTE_GLYPHS = ["♪", "♫", "♩", "♬"];
+  var NOTE_COLORS = ["#6e322c", "#9a7040", "#2d5c52", "#0a2f6b"];
+
+  function spawnNote(px, py) {
+    if (!instrument) return;
+    var now = performance.now();
+    if (notesLive >= 14 || now - lastNote < 70) return;
+    lastNote = now;
+    notesLive += 1;
+    var note = document.createElement("span");
+    note.className = "string-note";
+    note.setAttribute("aria-hidden", "true");
+    note.textContent = NOTE_GLYPHS[(Math.random() * NOTE_GLYPHS.length) | 0];
+    note.style.left = Math.max(12, Math.min(width - 28, px)) + "px";
+    note.style.top = Math.max(10, Math.min(height - 18, py)) + "px";
+    note.style.color = NOTE_COLORS[(Math.random() * NOTE_COLORS.length) | 0];
+    note.style.setProperty("--nx", ((Math.random() * 48) - 16).toFixed(0) + "px");
+    instrument.appendChild(note);
+    window.setTimeout(function () {
+      if (note.parentNode) note.parentNode.removeChild(note);
+      notesLive -= 1;
+    }, 1500);
+  }
 
   function resize() {
     var rect = canvas.getBoundingClientRect();
@@ -252,9 +303,14 @@
     start();
   }
 
+  var frameCount = 0;
   function frame() {
     step();
     draw();
+    frameCount += 1;
+    if ((frameCount & 7) === 0) {
+      spawnNote(width * (0.12 + ((frameCount * 13) % 76) / 100), stringY(frameCount % STRINGS));
+    }
     if (energy() < 0.08) {
       running = false;
       raf = 0;
@@ -307,6 +363,7 @@
       if (amp > 14) amp = 14;
       if (amp < -14) amp = -14;
       kick(sIndex, t, amp);
+      if (amp > 2.4 || amp < -2.4) spawnNote(x, stringY(sIndex));
     }
     lastX = x;
     lastY = py;
@@ -340,7 +397,11 @@
     for (s = 0; s < STRINGS; s++) {
       (function (index) {
         setTimeout(function () {
-          kick(STRINGS - 1 - index, open[index], 7.5 - index * 0.4);
+          var idx = STRINGS - 1 - index;
+          kick(idx, open[index], 7.5 - index * 0.4);
+          var nut = width > 80 ? 28 : 8;
+          var bridge = width > 80 ? width - 28 : width - 8;
+          spawnNote(nut + (bridge - nut) * open[index], stringY(idx));
         }, 280 + index * 110);
       })(s);
     }
