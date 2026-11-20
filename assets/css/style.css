@@ -122,7 +122,7 @@ a:hover { color: var(--verdigris); }
   position: sticky;
   top: 0;
   z-index: 40;
-  background: rgba(244, 247, 250, 0.94);
+  background: rgba(244, 247, 250, 0.96);
   border-bottom: 1px solid var(--line);
 }
 
@@ -164,14 +164,34 @@ a:hover { color: var(--verdigris); }
 @keyframes staff-draw { to { transform: scaleX(1); } }
 
 .header-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+  max-width: none;
+  margin: 0;
+}
+.board-head {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.75rem 1.25rem;
-  padding: 0.55rem 1.25rem 0.7rem;
-  max-width: 1720px;
-  margin: 0 auto;
+  justify-content: space-between;
+  gap: 0.55rem 0.8rem;
+  min-height: 108px;
+  padding: 0.65rem 1rem;
+  background:
+    linear-gradient(90deg, rgba(8, 12, 16, 0.18), rgba(8, 12, 16, 0.42)),
+    url("../images/blackboard.png") center 40% / cover no-repeat;
 }
+.board-head .wordmark { color: #f6f3ea; }
+.board-head .wordmark:hover { color: #f0d78c; }
+.board-head .resume-link {
+  color: #f6f3ea;
+  border-bottom-color: #e7d7a1;
+}
+.board-head .resume-link:hover { color: #f0d78c; }
+.board-head .icon-link { background: rgba(246, 243, 234, 0.92); }
 
 .wordmark {
   font-family: Petrona, Georgia, serif;
@@ -186,8 +206,9 @@ a:hover { color: var(--verdigris); }
 .primary-nav {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.2rem 1rem;
-  flex: 1;
+  padding: 0.7rem 1.15rem;
 }
 .primary-nav a {
   color: var(--ink);
@@ -244,21 +265,6 @@ a:hover { color: var(--verdigris); }
 .footer-icons { display: flex; gap: 0.45rem; align-items: center; }
 .footer-icons .icon-link { width: 34px; height: 34px; }
 
-.board-band {
-  position: relative;
-  z-index: 1;
-  background: #10161c;
-  line-height: 0;
-  max-height: 220px;
-  overflow: hidden;
-}
-.board-band img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  object-position: center 42%;
-  display: block;
-}
 .instrument {
   position: relative;
   z-index: 1;
@@ -266,6 +272,21 @@ a:hover { color: var(--verdigris); }
   touch-action: none;
   cursor: crosshair;
 }
+.string-title {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 1.35rem;
+  pointer-events: none;
+  font-size: clamp(1.7rem, 3vw, 2.45rem);
+  line-height: 1.05;
+  color: var(--ink);
+  text-shadow: 0 0 12px #f7f9fb, 0 0 3px #f7f9fb;
+}
+.string-title.falling-letters { text-shadow: none; }
 .instrument canvas {
   display: block;
   width: 100%;
@@ -488,12 +509,15 @@ p { margin: 0 0 0.9rem; max-width: var(--measure); }
 }
 
 @media (min-width: 980px) {
-  .home-grid { grid-template-columns: minmax(280px, 340px) minmax(0, 1fr); }
+  .home-grid { grid-template-columns: minmax(240px, 300px) minmax(0, 1fr); }
   .home-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .interest-box { width: 100%; }
   .interest-box ul { grid-template-columns: 1fr 1fr; gap: 0.32rem 0.6rem; }
-  .pfp-wrap { width: min(260px, 100%); }
+  .pfp-wrap { width: min(240px, 100%); }
 }
+.home-intro { min-width: 0; }
+.home-intro .highlights,
+.home-intro .about-card { width: 100%; }
 @media (min-width: 1100px) {
   main:has(.home-hero) { padding-right: calc(var(--globe) + 26px); }
 }
@@ -974,11 +998,32 @@ summary {
   font-weight: 700;
 }
 summary::-webkit-details-marker { display: none; }
-.cards { display: grid; gap: 0.5rem; padding: 0 0 0.8rem; }
+.cards { display: grid; gap: 0.55rem; padding: 0 0 0.8rem; }
 .course-card {
-  padding: 0.55rem 0;
-  border-top: 1px solid var(--line);
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #e7edf3;
+  border-left: 5px solid #8aa0b5;
 }
+.course-card.subj-math { background: #e4def8; border-color: #b7a6e4; }
+.course-card.subj-applied-math { background: #d7eee6; border-color: #7fbfa8; }
+.course-card.subj-statistics { background: #d9e7f8; border-color: #7ea4d4; }
+.course-card.subj-or { background: #f8e7cf; border-color: #d2a15a; }
+.course-card.subj-ml { background: #e6dff8; border-color: #a78bda; }
+.course-card.subj-graduate { background: #e1e6ee; border-color: #8b98ab; }
+.course-card.subj-cs { background: #dcefd4; border-color: #7fb56a; }
+.course-card.subj-systems { background: #d5e6ee; border-color: #6aa0b8; }
+.course-card.subj-ai { background: #d4f1f4; border-color: #5eb4c0; }
+.course-card.subj-crypto { background: #f6efd0; border-color: #c6ae55; }
+.course-card.subj-econ { background: #f8e0dc; border-color: #d4897c; }
+.course-card.subj-finance { background: #f3e6c8; border-color: #c6a15a; }
+.course-card.subj-lang { background: #fbe4d4; border-color: #e09a6a; }
+.course-card.subj-music { background: #f6ddd8; border-color: #c98478; }
+.course-card.subj-philosophy { background: #ece4f6; border-color: #b49ad4; }
+.course-card.subj-clps { background: #e7e0f2; border-color: #9d8cc4; }
+.course-card.subj-research { background: #d8efe4; border-color: #6aaf90; }
+.course-card.subj-elective { background: #e8ebf0; border-color: #9aa6b6; }
 .course-card header {
   font-size: 0.98rem;
   margin: 0;
@@ -1053,8 +1098,9 @@ td { vertical-align: top; padding: 0.4rem 0; }
 }
 @media (max-width: 720px) {
   :root { --globe: 200px; }
-  .board-band,
-  .board-band img { height: 150px; max-height: 150px; }
+  .header-row { grid-template-columns: 1fr; }
+  .board-head { min-height: 92px; }
+  .string-title { font-size: 1.45rem; padding: 0 0.85rem; }
   .earth-dock { width: 200px; right: 8px; bottom: 8px; }
   .earth-dock canvas { width: 200px; height: 200px; }
   .earth-caption { font-size: 0.62rem; line-height: 1.25; padding: 0.16rem 0.35rem; }

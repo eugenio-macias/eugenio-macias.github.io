@@ -80,11 +80,8 @@ title: Home
           <a class="with-icon" href="{{ '/assets/files/Resume_Scientific_ML.pdf' | relative_url }}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M6 2h8l6 6v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm7 1.5V9h5.5L13 3.5zM8 13h8v1.5H8V13zm0 3h6v1.5H8V16z"/></svg>Scientific ML resume (PDF)</a>
         </div>
       </article>
-    </div>
-  </div>
-</section>
 
-<section class="highlights">
+      <section class="highlights">
   <h2>Highlights</h2>
   <div class="home-cards">
     <article class="home-card">
@@ -113,9 +110,11 @@ title: Home
       </ul>
     </article>
   </div>
-</section>
+      </section>
+    </div>
+  </div>
 
-<section class="trips" aria-label="Trips I mean to take">
+  <section class="trips" aria-label="Trips I mean to take">
   <article class="trips-box">
     <h2>Trips I mean to take</h2>
     <p class="interest-lead">Soon. Blue pins on the globe are this list. White dots are cities in countries I’ve already been to.</p>
@@ -143,4 +142,5 @@ title: Home
       <li><span class="pin" aria-hidden="true"></span><span>Sail Raja Ampat, Indonesia</span></li>
     </ul>
   </article>
+  </section>
 </section>

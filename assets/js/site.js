@@ -2,6 +2,18 @@
   "use strict";
 
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var instrument = document.querySelector(".instrument");
+  var pageTitle = document.querySelector("main h1");
+  if (instrument && pageTitle) {
+    pageTitle.classList.add("string-title");
+    instrument.appendChild(pageTitle);
+  }
+  document.querySelectorAll(".course-card").forEach(function (card) {
+    var tag = card.querySelector(".tag");
+    if (!tag) return;
+    var key = tag.textContent.trim().toLowerCase().replace(/[^a-z]+/g, "-").replace(/^-|-$/g, "");
+    if (key) card.classList.add("subj-" + key);
+  });
   var bar = document.getElementById("scrollBar");
   var score = document.getElementById("scoreLines");
   var canvas = document.getElementById("strings");
@@ -93,7 +105,7 @@
     }
   }
   if (!reduce && document.querySelector(".projects-page")) {
-    document.querySelectorAll(".projects-hero h1, .pc-title").forEach(function (el) {
+    document.querySelectorAll(".string-title, .pc-title").forEach(function (el) {
       var text = el.textContent;
       el.textContent = "";
       el.classList.add("falling-letters");
