@@ -7,6 +7,33 @@
   var cities = window.EARTH_CITIES;
   if (!maskB64 || !cities) return;
 
+  /* Planned trips. Blue pins, separate from cities already visited. */
+  var trips = [
+    ["Hà Giang loop", "Vietnam", 23.14, 105.02],
+    ["Camino de Santiago", "Spain", 42.88, -8.545],
+    ["San Sebastián", "Spain", 43.318, -1.981],
+    ["Oaxaca", "Mexico", 17.065, -96.725],
+    ["Pátzcuaro", "Mexico", 19.516, -101.609],
+    ["Chengdu", "China", 30.66, 104.065],
+    ["Xi'an", "China", 34.265, 108.954],
+    ["Edinburgh", "Scotland", 55.953, -3.188],
+    ["Shangri-La", "China", 27.827, 99.707],
+    ["Silk Road", "China", 40.142, 94.662],
+    ["Yi Peng", "Thailand", 18.788, 98.986],
+    ["Chiang Mai mountains", "Thailand", 18.587, 98.487],
+    ["Patagonia", "Argentina", -49.331, -72.886],
+    ["Ålesund", "Norway", 62.472, 6.19],
+    ["Svalbard", "Norway", 78.223, 15.646],
+    ["Kumano Kodo", "Japan", 33.839, 135.774],
+    ["Annapurna", "Nepal", 28.53, 83.878],
+    ["Kakheti", "Georgia", 41.85, 45.72],
+    ["Galápagos", "Ecuador", -0.744, -90.316],
+    ["St. Petersburg", "Russia", 59.934, 30.335],
+    ["Petra", "Jordan", 30.328, 35.444],
+    ["Wadi Rum", "Jordan", 29.577, 35.421],
+    ["Raja Ampat", "Indonesia", -0.23, 130.51]
+  ];
+
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var caption = document.getElementById("earthCaption");
   var defaultCaption = caption ? caption.textContent : "";
@@ -145,6 +172,48 @@
         rad: (rad + 3) / scale,
         name: city[0],
         country: city[1]
+      });
+    }
+
+    for (var t = 0; t < trips.length; t++) {
+      var trip = trips[t];
+      var tphi = trip[2] * Math.PI / 180;
+      var tlam = trip[3] * Math.PI / 180 - lam0;
+      var tx = Math.cos(tphi) * Math.sin(tlam);
+      var ty = Math.sin(tphi);
+      var tz = Math.cos(tphi) * Math.cos(tlam);
+      if (tz < 0.08) continue;
+      var tsx = cx + tx * r;
+      var tsy = cy - ty * r;
+      var ps = (3.1 + tz * 1.35) * dpr;
+      ctx.save();
+      ctx.translate(tsx, tsy);
+      ctx.fillStyle = "#2563eb";
+      ctx.strokeStyle = "rgba(236, 244, 255, 0.95)";
+      ctx.lineWidth = Math.max(1, dpr * 0.65);
+      ctx.beginPath();
+      ctx.moveTo(-ps * 0.46, -ps * 0.02);
+      ctx.lineTo(0, ps * 1.45);
+      ctx.lineTo(ps * 0.46, -ps * 0.02);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(0, -ps * 0.62, ps * 0.78, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(0, -ps * 0.62, ps * 0.28, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(236, 244, 255, 0.96)";
+      ctx.fill();
+      ctx.restore();
+      var headY = (tsy - ps * 0.2) / scale;
+      hits.push({
+        x: tsx / scale,
+        y: headY,
+        rad: (ps * 1.35) / scale,
+        name: "Next: " + trip[0],
+        country: trip[1]
       });
     }
   }

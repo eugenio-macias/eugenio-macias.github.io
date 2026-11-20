@@ -55,6 +55,10 @@
     </div>
   </header>
 
+  <div class="board-band">
+    <img src="{{ '/assets/images/blackboard.png' | relative_url }}" width="1400" height="349" alt="Chalkboard of measure-theory notes">
+  </div>
+
   <div class="instrument">
     <canvas id="strings" role="img" aria-label="Six guitar strings. Move across them to pluck."></canvas>
   </div>
@@ -90,8 +94,8 @@
   </footer>
 
   <div class="earth-dock">
-    <canvas id="earth" aria-label="Rotating dark globe. Dots mark major cities in countries Eugenio has visited."></canvas>
-    <p class="earth-caption" id="earthCaption">Cities I’ve been to</p>
+    <canvas id="earth" aria-label="Rotating dark globe. White dots mark major cities in countries Eugenio has visited. Blue pins mark trips he wants to take."></canvas>
+    <p class="earth-caption" id="earthCaption">White dots: cities I’ve been to. Blue pins: trips I want to take.</p>
   </div>
 
   <script src="{{ '/assets/js/earth-data.js' | relative_url }}" defer></script>

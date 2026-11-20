@@ -63,16 +63,16 @@ title: Home
         <h2>About me</h2>
         <div class="bio">
           <p>
-            I’m from Mexico. I did the International Baccalaureate at UWC Mostar in Bosnia and Herzegovina, then came to Brown. My coursework is in measure theory, functional analysis, optimization, stochastic processes, reinforcement learning, scientific machine learning, and dynamical systems.
+            I’m from Mexico. I did the International Baccalaureate at UWC Mostar, in Bosnia and Herzegovina, and then came to Brown for a B.S. in Applied Mathematics–Computer Science and a B.A. in Mathematics. I’m interested in learning <em class="kw">dynamical laws</em> from imperfect data: <em class="kw">probability-grounded machine learning</em>, <em class="kw">partial differential equations</em>, <em class="kw">reinforcement learning</em>, <em class="kw">physics-informed deep learning</em>, and <em class="kw">stochastic processes</em>.
           </p>
           <p>
-            I am writing an honors thesis with Prof. Björn Sandstede on weak-form PDE discovery for stochastic collective dynamics. I have also been an undergraduate research assistant in the Karniadakis Lab, benchmarking quasi-Newton training for physics-informed neural networks on the Cahn–Hilliard equation, and I worked with Prof. George Konidaris on curiosity-driven transfer in ProcGen.
+            I’m writing an honors thesis with Prof. Björn Sandstede on <em class="kw">weak-form PDE discovery</em> for <em class="kw">stochastic collective dynamics</em>. In the Karniadakis Lab I benchmark <em class="kw">quasi-Newton</em> methods for <em class="kw">physics-informed neural networks</em>, including the <em class="kw">Cahn–Hilliard equation</em>. With Prof. George Konidaris I worked on <em class="kw">curiosity-driven transfer</em> in <em class="kw">ProcGen</em>. I’m also going deeper into <em class="kw">prediction markets</em> and <em class="kw">weather modeling</em>, with a keen interest in <em class="kw">formal proof</em>, <em class="kw">quantum cryptography</em>, and <em class="kw">robotics</em>, which I still want to learn.
           </p>
           <p>
-            In summer 2025 I interned at Citi on equity derivatives in New York. I now work there as a quantitative trading analyst on FX systematic trading. I TA Operations Research: Probabilistic Models and have TA’d Calculus II.
+            In summer 2025 I interned at Citi on <em class="kw">equity derivatives</em> in New York. I work there now in <em class="kw">FX systematic trading</em>. I TA <em class="kw">Operations Research: Probabilistic Models</em> and have TA’d <em class="kw">Calculus II</em>.
           </p>
           <p>
-            I play classical guitar. I play <a class="with-icon" href="https://www.chess.com/member/GM_Yuyo" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M7 21h10v-2H7v2zm5-19 1.5 3h3l-2.4 2.1.9 3.4L12 9.2 8 10.5l.9-3.4L6.5 5h3L12 2zM8 12h8l-1 7H9l-1-7z"/></svg>bullet chess</a>. I have run five marathons. Spanish and English are native; German and French are B1.
+            I have friends in almost a hundred countries, and I love showing up somewhere and learning how people live there. I’ve been to 50 countries, and I mean to keep going. I play <em class="kw">classical guitar</em>. I play <a class="with-icon" href="https://www.chess.com/member/GM_Yuyo" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M7 21h10v-2H7v2zm5-19 1.5 3h3l-2.4 2.1.9 3.4L12 9.2 8 10.5l.9-3.4L6.5 5h3L12 2zM8 12h8l-1 7H9l-1-7z"/></svg><em class="kw">bullet chess</em></a>. I’ve run <em class="kw">five marathons</em>. <em class="kw">Spanish</em> and <em class="kw">English</em> are native; <em class="kw">German</em> and <em class="kw">French</em> are <em class="kw">B1</em>. Lately I listen to <em class="kw">jazz</em>. I love <em class="kw">Asian food</em> and I’ll try any dish. I’m still looking for the ultimate <em class="kw">xiao long bao</em>, and a cold beer is a good ending to that search.
           </p>
         </div>
         <div class="resume-row">
@@ -113,4 +113,34 @@ title: Home
       </ul>
     </article>
   </div>
+</section>
+
+<section class="trips" aria-label="Trips I mean to take">
+  <article class="trips-box">
+    <h2>Trips I mean to take</h2>
+    <p class="interest-lead">Soon. Blue pins on the globe are this list. White dots are cities in countries I’ve already been to.</p>
+    <ul>
+      <li><span class="pin" aria-hidden="true"></span><span>Hà Giang loop, Vietnam</span></li>
+      <li><span class="pin" aria-hidden="true"></span><span>Camino de Santiago, Spain</span></li>
+      <li><span class="pin" aria-hidden="true"></span><span>Culinary trip in San Sebastián, Spain</span></li>
+      <li><span class="pin" aria-hidden="true"></span><span>Culinary trip in Oaxaca, Mexico</span></li>
+      <li><span class="pin" aria-hidden="true"></span><span>Día de Muertos in Michoacán, Mexico</span></li>
+      <li><span class="pin" aria-hidden="true"></span><span>Sichuan and Xi’an culinary trip, China</span></li>
+      <li><span class="pin" aria-hidden="true"></span><span>Hogmanay in Edinburgh, Scotland</span></li>
+      <li><span class="pin" aria-hidden="true"></span><span>Yunnan and Shangri-La, China</span></li>
+      <li><span class="pin" aria-hidden="true"></span><span>The Silk Road, China</span></li>
+      <li><span class="pin" aria-hidden="true"></span><span>Yi Peng festival, Thailand</span></li>
+      <li><span class="pin" aria-hidden="true"></span><span>Chiang Mai mountains, Thailand</span></li>
+      <li><span class="pin" aria-hidden="true"></span><span>Patagonia</span></li>
+      <li><span class="pin" aria-hidden="true"></span><span>Midsummer in Ålesund, Norway</span></li>
+      <li><span class="pin" aria-hidden="true"></span><span>Svalbard in the summer, Norway</span></li>
+      <li><span class="pin" aria-hidden="true"></span><span>Kumano Kodo, Japan</span></li>
+      <li><span class="pin" aria-hidden="true"></span><span>Annapurna Himalaya trek, Nepal</span></li>
+      <li><span class="pin" aria-hidden="true"></span><span>Wine harvest in Kakheti, Georgia</span></li>
+      <li><span class="pin" aria-hidden="true"></span><span>Galápagos, Ecuador</span></li>
+      <li><span class="pin" aria-hidden="true"></span><span>Russian ballet in St. Petersburg, Russia</span></li>
+      <li><span class="pin" aria-hidden="true"></span><span>Wadi Rum and Petra, Jordan</span></li>
+      <li><span class="pin" aria-hidden="true"></span><span>Sail Raja Ampat, Indonesia</span></li>
+    </ul>
+  </article>
 </section>
