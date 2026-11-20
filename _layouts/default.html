@@ -89,6 +89,13 @@
     </div>
   </footer>
 
+  <div class="earth-dock">
+    <canvas id="earth" aria-label="Rotating dark globe. Dots mark major cities in countries Eugenio has visited."></canvas>
+    <p class="earth-caption" id="earthCaption">Cities I’ve been to</p>
+  </div>
+
+  <script src="{{ '/assets/js/earth-data.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/js/earth.js' | relative_url }}" defer></script>
   <script src="{{ '/assets/js/site.js' | relative_url }}" defer></script>
 </body>
 </html>

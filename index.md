@@ -4,9 +4,26 @@ title: Home
 ---
 
 <section class="hero">
+  <div class="hero-side">
   <figure class="portrait">
     <img src="{{ '/assets/images/profile_pic.png' | relative_url }}" width="800" height="800" alt="Portrait of Eugenio Macías Orozco">
   </figure>
+  <aside class="interest-box" aria-label="Scientific interests">
+    <h2>Scientific interests</h2>
+    <p>Learning dynamical laws from imperfect data.</p>
+    <ul>
+      <li>Probability-grounded machine learning</li>
+      <li>Partial differential equations and dynamical systems</li>
+      <li>Measure theory, stochastic processes, and optimization</li>
+      <li>Reinforcement learning</li>
+      <li>Physics-informed and scientific deep learning</li>
+      <li>Mathematical modeling</li>
+      <li>Prediction markets and weather modeling</li>
+      <li>Formal proof</li>
+      <li>Quantum cryptography and robotics, both of which I want to learn</li>
+    </ul>
+  </aside>
+  </div>
 
   <div class="intro">
     <p class="intro-kicker">Applied mathematics and classical guitar</p>
